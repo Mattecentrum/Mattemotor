@@ -1,35 +1,36 @@
-# mattemotor
+# Mattemotor (Math engine)
 
-This is the mathexercise engine that is used on [matteboken.se](http://matteboken.se/)
+This is the interactive mathematics exercise engine that is used on [matteboken.se](http://matteboken.se/) and [webmatematik.dk](http://webmatematik.dk).
 
-Example of exercise [Skolår 8/Bråk/Bråktal](http://www.matteboken.se/lektioner/skolar-8/brak/braktal/uppgifter#/exercises/10993/11058)
+An example of exercise used there is here: [Skolår 8/Bråk/Bråktal](http://www.matteboken.se/lektioner/skolar-8/brak/braktal/uppgifter#/exercises/10993/11058).
 
-To be able to run and test the project you need to...
+Note that the source code is not fully tested, but we are working on it.
 
-## 1) instal node.js
-Node.js [https://nodejs.org/](https://nodejs.org/)
+## Prerequisites
 
-## 2) install grunt-cli and bower globaly
+To be able to run and test the project you need to:
 
-`npm install -g grunt-cli bower yo generator-karma generator-angular`
+* 1) Install Node.js: [https://nodejs.org/](https://nodejs.org/).
+On Debian/Ubuntu, install the following packages: `nodejs, npm, nodejs-dev`. If you experience problems later on, also install `nodejs-legacy`.
 
-## 3) navigate to project folder and run
+* 2) Install certain npm packages globally: `npm install -g grunt-cli bower yo generator-karma generator-angular` (on Linux you must have root access).
 
-`npm install`
+* 3) Then navigate to project folder and run `bower install`.
 
-## 4.1) Build & development
+* 4) Finally, in the project folder, run `npm install`.
+
+## Building and development
 
 Run `grunt` for linters, `grunt build` for building and `grunt serve` for preview.
 
-## 4.2) Testing
+## Testing
 
 Running `grunt test` will run the unit tests with karma.
 
-## 5) Creating your own exercises
+##  Creating your own exercises
 
-If you want to create your own exercise a good way to start would be to read the excelent manual(Swedish only) [Create-Exercise](Create-Exercise.md)
+If you want to create your own exercise a good way to start would be to read the excellent manual (Currently only in Swedish): [Create-Exercise](Create-Exercise.md)
 
-The `list` and `exercises` are stored at `app/json/list/` and `/app/json/exercise/
-
+The `list` and `exercises` are stored at `app/json/list/` and `/app/json/exercise/`.
 
 [Note! the source code is not fully tested, but we are working on it]
