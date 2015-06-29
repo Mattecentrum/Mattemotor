@@ -494,13 +494,12 @@ För enlighetens och utseendets skull, se till att alla tal och alla matematiska
 
 Följande är en lista på vanliga fel, som gör att uppgiften inte fungerar som den ska eller inte visas alls:
 
-* Glömt att publicera bÃÂ¥de uppgiften och den mapp den ligger under i Umbraco.
 * Glömt att skriva \\ istället för \ i LaTeX-uttryck.
 * Glömt att avsluta varje del i uppgiftskoden, förutom den sista, med ett kommatecken.
 * Glömt att avsluta {{ med }} eller \\( med \\), eller $$ med $$.
-* Skrivit fel variabelnamn, eller anvÃÂ¤nder en variabel som inte definierats.
-* Skrivit ett inkorrekt uttryck innanfÃÂ¶r {{ }}.
-* Den angivna svarsalternativet ÃÂ¤r ett som inte existerar.
+* Skrivit fel variabelnamn, eller använder en variabel som inte definierats.
+* Skrivit ett inkorrekt uttryck innanför {{ }}.
+* Den angivna svarsalternativet är ett som inte existerar
 
 Avslutningsvis är det viktigt att påpeka att det bästa sättet att lära sig uppgiftsmotorn är att försöka skriva egna uppgifter. Kopiera gärna från gamla uppgifter (antingen bland de som redan finns i Umbraco och/eller från avsnitt 9) och gör nya. Var kreativ!
 
