@@ -15,7 +15,9 @@ On Debian/Ubuntu, install the following packages: `nodejs, npm, nodejs-dev`. If 
 
 * 2) Install certain npm packages globally: `npm install -g grunt-cli bower yo generator-karma generator-angular` (on Linux you must have root access).
 
-* 3) Then, navigate to project folder and run `npm install`.
+* 3) Then navigate to project folder and run `bower install`.
+
+* 4) Finally, in the project folder, run `npm install`.
 
 ## Building and development
 
