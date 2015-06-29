@@ -185,9 +185,9 @@ Notera att länkens adress står inom enkla citationstecken.
 
 I avsnitt 2 såg vi exempel på en uppgift av typen "field". Nu ska vi upptäcka lite mer av vad "field"-uppgifter kan göra för oss genom att ha flera olika svarsrutor. Vi gör en uppgift där eleven ska fylla i några olika tal med vissa egenskaper:
 
-- Ã¯ÂÂ·.Ett positivt tal som ÃÂ¤r delbart med bÃÂ¥de 2 och 3.ÃÂ
-- Ã¯ÂÂ·.Ett primtal mellan 10 och 20.ÃÂ
-- Ã¯ÂÂ·.Ett negativt tal.ÃÂ
+* Ett positivt tal som är delbart med både 2 och 3.
+* Ett primtal mellan 10 och 20.
+* Ett negativt tal.
 
 Den uppgiften skrivs såhär:
 
