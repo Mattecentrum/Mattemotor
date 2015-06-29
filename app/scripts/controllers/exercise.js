@@ -11,15 +11,12 @@ angular.module('mattemotorApp')
   .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', 'exercise', 'typeResolver', 'progress',
   	function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, exercise, typeResolver, progress) {
     
-    //Load exercise
-    $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId }, initExercise);
-    
     function initExercise(data) {
          //Setup answer model so we can keep track of correct answers
         $scope.answer = {};
         $scope.mathVars = {};
         
-        setVariables(data.variables)
+        setVariables(data.variables);
         evaluateExpectedAnswer($scope.exercise);
         eachRecursive($scope.exercise);
 
@@ -35,8 +32,11 @@ angular.module('mattemotorApp')
         }
        
         $scope.exercise.exercise = $sce.trustAsHtml(data.exercise);
-    };
-
+    }
+    
+    //Load exercise
+    $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId }, initExercise);
+    
     function setVariables(variables) {
        
         if(!variables) {
@@ -88,26 +88,19 @@ angular.module('mattemotorApp')
             } else if (type === 'object') {
                 for (var prop in obj) {
                     var propertyValue = obj[prop];
-
                     mathed = toFunc.Parse(propertyValue);
-
                     mathed = mathed.replace(/\\/g, '\\\\');
-
                     args = varNames.slice(0);
                     args.push(mathed);
-
                     func = Function.apply(null, args);
                     exercise.expectedanswer[key][prop] = func;
                 }
             } else {
                 mathed = toFunc.Parse(exercise.expectedanswer[key]);
-
                 mathed = mathed.replace(/\\/g, '\\\\');
-
                 args = varNames.slice(0);
                 args.push(mathed);
                 func = Function.apply(null, args);
-
                 exercise.expectedanswer[key] = func;
             }
         }
@@ -267,7 +260,7 @@ angular.module('mattemotorApp')
         var func = Function.apply(null, args);
 
         return func;
-    };
+    }
 
     function randomize(from, to) {
         //100 -  = seed
@@ -295,12 +288,12 @@ angular.module('mattemotorApp')
         pow = Math.pow(10, decimals);
         result = Math.round(randomNumber * pow) / pow;
         return result;
-    };
+    }
 
     function getExpression(str) {
         var pattern = new RegExp('{{.*?}}', 'g');
         return str.match(pattern);
-    };
+    }
 
     //http://docs.angularjs.org/api/ng.$interpolate could probably be used
     function evaluateExpression(value, isFunctiongraph) {
@@ -328,11 +321,11 @@ angular.module('mattemotorApp')
         }
 
         return result;
-    };
+    }
 
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
-    };
+    }
 
     function answersEqual(givenAnswer, predefinedAnswer) {
         var equal = false,
@@ -394,7 +387,7 @@ angular.module('mattemotorApp')
             }
         }
         return equal;
-    };
+    }
 
     $scope.verify = function(answer) {
         var givenAnswers = [];

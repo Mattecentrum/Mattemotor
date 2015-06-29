@@ -10,7 +10,7 @@ Node.js [https://nodejs.org/](https://nodejs.org/)
 
 ## 2) navigate to project folder and run
 
-`npm install`
+`npm install
 
 ## 3.1) Build & development
 
