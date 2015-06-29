@@ -1,0 +1,13 @@
+{
+  "name": "Exponentialfunktion", 
+  "inputtype": "multifield",
+  "inputformat" : "\\( f(x) = \\)[[field1]] \\( \\cdot {{a}}^x \\)",
+  "exercise": "Fyll i rutan nedan för exponentialfunktionen \\( f(x) \\) så att \\( f(0) = {{b}} \\).",
+  "variables": { "a" : [1.02, 1.50], "b" : [-7, 7] },
+  "expectedanswer": {
+      "field1": "{{b}}"
+  },
+  "error": {
+      "message": "Inte riktigt rätt. \\( f(0) \\) innebär att \\( x = 0 \\) vilket gör att exponentialdelen försvinner."
+  }
+}

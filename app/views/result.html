@@ -1,0 +1,22 @@
+<div data-ng-controller="ExerciseResultCtrl">
+    <!-- Feedback efter sista uppgift -->
+    <div class="definition cssarrow">
+        <h1>{{ translateText.donewiththeexecices }}</h1>
+        <p>{{ translateText.youhad }} {{nrOfCorrectAnswers}} {{ translateText.of }} {{nrOfExercises}} {{ translateText.correct }}.</p>
+    </div>
+
+    <div class="interaction">
+        <div class="clearfix navbuttons">
+            <div class="center">
+                <div>
+                    <!-- Ska starta om från ettan -->
+                    <button type="button" data-ng-click="redo()" class="button gray wide">{{ translateText.dotheexerciseagain }}</button>
+                </div>
+                <div>
+                    <!-- Ska gå till nästa avsnitt i Umbraco -->
+                    <button type="button" data-ng-click="next()" class="button gray wide">{{ translateText.nextchapter }}: {{ exercises.next.name }}</button>
+                </div
+            </div>
+        </div>
+    </div>
+</div>
