@@ -31,8 +31,8 @@ Running `grunt test` will run the unit tests with karma.
 
 If you want to create your own exercise a good way to start would be to read the excellent manual (Currently only in Swedish): [Create-Exercise](Create-Exercise.md)
 
-The `list` and `exercises` are stored at `app/json/sv/list/` and `/app/json/sv/exercise/`.
+The `list` and `exercises` are stored at language specific folders `app/json/sv/list/` and `/app/json/sv/exercise/`.
 
 ## Language support
 
-The first segment of the url is what decides the language for example /sv/list/1/exercise/1 will load swedish exercises from the folder json/sv and /en/list/1/exercise/1 will load the english exercises
+The first segment of the url is what decides the language for example `/sv/list/1/exercise/1` will load swedish exercises from the folder json/sv and `/en/list/1/exercise/1` will load the english exercises
