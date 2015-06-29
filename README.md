@@ -26,7 +26,7 @@ Running `grunt test` will run the unit tests with karma.
 
 ## 4) Creating your own exercises
 
-If you want to create your own exercise a good way to start would be to read the excelent description(Swedish only for the moment) [Create-Exercise](Create-Exercise.md)
+If you want to create your own exercise a good way to start would be to read the excelent manual(Swedish only) [Create-Exercise](Create-Exercise.md)
 
 The list and exercises are stored at app/json/list/ and /app/json/exercise/
 
