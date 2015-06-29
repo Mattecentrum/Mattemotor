@@ -6,7 +6,7 @@ Example of exercise [Skolår 8/Bråk/Bråktal](http://www.matteboken.se/lektione
 
 To be able to run and test the project you need to...
 
-## 0)
+## 0) instal node.js
 Node.js [https://nodejs.org/](https://nodejs.org/)
 
 ## 1) install grunt-cli and bower globaly
