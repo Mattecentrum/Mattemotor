@@ -1,5 +1,9 @@
 # mattemotor
 
+This is the mathexercise engine that is used on [matteboken.se](http://matteboken.se/)
+
+Example of exercise [Skolår 8/Bråk/Bråktal](http://www.matteboken.se/lektioner/skolar-8/brak/braktal/uppgifter#/exercises/10993/11058)
+
 To be able to run and test the project you need to install
 
 Node.js [https://nodejs.org/](https://nodejs.org/)
