@@ -4,8 +4,9 @@ This is the mathexercise engine that is used on [matteboken.se](http://matteboke
 
 Example of exercise [Skolår 8/Bråk/Bråktal](http://www.matteboken.se/lektioner/skolar-8/brak/braktal/uppgifter#/exercises/10993/11058)
 
-To be able to run and test the project you need to install
+To be able to run and test the project you need to...
 
+## 0)
 Node.js [https://nodejs.org/](https://nodejs.org/)
 
 ## 1) install grunt-cli and bower globaly
