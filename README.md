@@ -23,3 +23,7 @@ Run `grunt` for building and `grunt serve` for preview.
 ## 3.2) Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+If you want to create your own exercise a good way to start would be to read the excelent description(Swedish only for the moment) [Create-Exercise](Create-Exercise.md)
+
+[Note! the source code is not fully tested, but we are working on it]
