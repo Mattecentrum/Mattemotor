@@ -21,22 +21,17 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="mathexerciseengine exercise" data-ng-app="mattemotorApp"
-        data-translate-done="Klar" 
-        data-translate-showanswer="Visa svar"
-        data-translate-dotheexerciseagain="Gör om uppgifterna"
-        data-translate-nextexercise="Nästa övning">
+        <div class="mathexerciseengine exercise" data-ng-app="mattemotorApp">
         <div class="box" style="border-top-color:#e3a50c" data-ng-controller="MainCtrl as main">
             <div class="breadcrumb">
-                <span>Övningsuppgifter:</span>
+                <span ng-bind-html="'EXERCISES' | translate"></span>
                 <a href="{{exercises.educationFolderUrl}}">{{exercises.educationFolderName}}</a> / <a href="{{exercises.sectionUrl}}">{{exercises.sectionName}}</a> / <a href="{{exercises.classUrl}}">{{exercises.className}}</a> 
             </div>
-                        
             <div class="monitor clearfix">
         
                 <div class="center">
                   <div>
-                    <a data-ng-repeat="exercise in exercises.exercises track by exercise.id" href="#/list/{{exercise.listId}}/exercise/{{exercise.id}}" data-ng-class="getClass(exercise)"></a>
+                    <a data-ng-repeat="exercise in exercises.exercises track by exercise.id" href="#{{$parent.exercises.language}}/list/{{exercise.listId}}/exercise/{{exercise.id}}" data-ng-class="getClass(exercise)"></a>
                   </div>
                 </div>
             </div>

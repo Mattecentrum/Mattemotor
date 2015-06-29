@@ -8,14 +8,18 @@
  * Controller of the mattemotorApp
  */
 angular.module('mattemotorApp')
-    .controller('MainCtrl', ['$scope', '$route', '$routeParams', '$location', 'pager', 'exerciseList', 'progress', function($scope, $route, $routeParams, $location, pager, exerciseList, progress) {
+    .controller('MainCtrl', ['$scope', '$route', '$routeParams', '$location', '$translate', 'pager', 'exerciseList', 'progress', function($scope, $route, $routeParams, $location, $translate, pager, exerciseList, progress) {
        
         $scope.exercises = {};
 
         $scope.$on('$routeChangeSuccess', function() {
-            
-            if ($routeParams.listId && $scope.listId !== $routeParams.listId) {
-                exerciseList.Load({ listId: $routeParams.listId }, function(data) {
+      
+            $translate.use($routeParams.language);
+
+            console.log($scope.language, $routeParams.language);
+
+            if ($routeParams.listId && ($scope.listId !== $routeParams.listId || $scope.language !== $routeParams.language) ) {
+                exerciseList.Load({ listId: $routeParams.listId, language: $routeParams.language }, function(data) {
                     
                     //the property listid
                     for (var i = 0; i < data.exercises.length; i++) {
@@ -23,6 +27,7 @@ angular.module('mattemotorApp')
                     }
                    
                     $scope.listId = $routeParams.listId;
+                    $scope.language = $routeParams.language;
 
                     $scope.exercises = data;
 

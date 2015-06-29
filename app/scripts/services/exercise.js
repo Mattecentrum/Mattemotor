@@ -9,7 +9,7 @@
  */
 angular.module('mattemotorApp')
     .factory('exercise', function ($resource) {
-        return $resource('json/exercise/:exerciseId.json', {}, {
-            query: { method: 'GET', params: { exerciseId: 'all' }, isArray: true },
+        return $resource('json/:language/exercise/:exerciseId.json', {}, {
+            query: { method: 'GET', params: { exerciseId: 'all', language: 'all' }, isArray: true },
         });
     });

@@ -21,22 +21,33 @@ angular
     .config(['$routeProvider', '$locationProvider', '$translateProvider', 
     function($routeProvider, $locationProvider, $translateProvider) {
         $routeProvider
-            .when('/list/:listId/exercise/:exerciseId', {
+            .when('/:language/list/:listId/exercise/:exerciseId', {
               templateUrl: '/views/exercise.html',
               controller: 'ExerciseCtrl',
               controllerAs: 'book'
             })
         .otherwise({
-            redirectTo: '/list/1/exercise/1'
+            redirectTo: '/sv/list/1/exercise/1'
         });
         
-         $translateProvider.translations('sv', {
+        $translateProvider.translations('sv', {
+            EXERCISES : 'Övningsuppgifter:',
             NEXTEXERCISE : 'Nästa',
             DONE : 'Klar',
             SHOWANSWER : 'Visa svaret',
             WRONG : 'Fel',
             TRYAGAIN : 'Prova igen',
             CORRECT : 'Rätt!'
+        });
+
+        $translateProvider.translations('en', {
+            EXERCISES : 'Exercises:',
+            NEXTEXERCISE : 'Next',
+            DONE : 'Done',
+            SHOWANSWER : 'Show the correct answer',
+            WRONG : 'Wrong',
+            TRYAGAIN : 'Try again',
+            CORRECT : 'Correct!'
         });
 
         $translateProvider.useSanitizeValueStrategy('sanitize');

@@ -8,11 +8,13 @@
  * Controller of the mattemotorApp
  */
 angular.module('mattemotorApp')
-  .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', 'exercise', 'typeResolver', 'progress',
-  	function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, exercise, typeResolver, progress) {
+  .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', '$translate', 'exercise', 'typeResolver', 'progress',
+  	function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, exercise, typeResolver, progress) {
     
     function initExercise(data) {
          //Setup answer model so we can keep track of correct answers
+        $translate.use($routeParams.language);
+
         $scope.answer = {};
         $scope.mathVars = {};
         
@@ -35,7 +37,7 @@ angular.module('mattemotorApp')
     }
     
     //Load exercise
-    $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId }, initExercise);
+    $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId, language: $routeParams.language }, initExercise);
     
     function setVariables(variables) {
        
