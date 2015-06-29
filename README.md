@@ -6,11 +6,11 @@ Node.js [https://nodejs.org/](https://nodejs.org/)
 
 ## 1) install grunt-cli and bower globaly
 
-npm install -g grunt-cli bower
+`npm install -g grunt-cli bower`
 
 ## 2) navigate to project folder and run
 
-npm install
+`npm install`
 
 ## 3.1) Build & development
 
