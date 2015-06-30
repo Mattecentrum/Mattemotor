@@ -2,7 +2,7 @@
     "name": "What is the next number", 
     "inputtype": "field",
     "exercise": "The first numbers in a series are: $${{start}}, {{start+dist}}, {{start+2*dist}}, {{start+3*dist}}$$. What is the next number?", 
-    "expectedanswer": {"Nästa tal är": "{{start+4*dist}}"},
+    "expectedanswer": {"Next number:": "{{start+4*dist}}"},
     "variables": {
     "start": [1,10],
     "dist": [1,5]
