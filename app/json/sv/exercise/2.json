@@ -25,6 +25,6 @@
    
   "error": {
 
-      "message": "I origo är både x och y 0, första kvadranten är längst upp till vänster"
+      "message": "I origo gäller $x=0$ och $y=0$. Första kvadranten är längst upp till vänster"
   }
 }

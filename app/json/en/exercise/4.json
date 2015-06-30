@@ -1,7 +1,7 @@
 {
-    "name": "Ettans tabell", 
+    "name": "The ones table", 
     "inputtype": "dropdown",
-    "exercise": "Para ihop rätt uträkning med rätt svar.", 
+    "exercise": "Pair up each calculation with the correct answer.", 
     "variables": {
         "A": [4,6],
         "B": [1,3],
@@ -27,6 +27,6 @@
         "question3" : "{{C}}"
     },
     "error": {
-        "message": "Inte riktigt rätt. Ett tal multiplicerat med 1 förändras inte."
+        "message": "Not quite right. A number multiplied by 1 does not change."
     }
 }

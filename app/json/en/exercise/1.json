@@ -1,6 +1,6 @@
 {
-	"name":"Wich number is the biggest",
-	"exercise":"Click on the number that is biggeest",
+	"name":"Which number is the biggest",
+	"exercise":"Click on the biggest number.",
 	"inputtype":"button",
 	"variables":{
 		"B":[20,100],
@@ -16,6 +16,6 @@
 	"expectedanswer": {
 		"question":"{{B}}"
 	},
-	"error": { "message": ""},
+	"error": { "message": "Not quite correct."},
 	"id":8354
 }

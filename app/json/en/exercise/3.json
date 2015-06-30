@@ -1,13 +1,13 @@
 {
-    "name": "Vilket är nästa tal", 
+    "name": "What is the next number", 
     "inputtype": "field",
-    "exercise": "De första talen i en talserie är: {{start}}, {{start+dist}}, {{start+2*dist}}, {{start+3*dist}}. Vilket är nästa tal?", 
+    "exercise": "The first numbers in a series are: $${{start}}, {{start+dist}}, {{start+2*dist}}, {{start+3*dist}}$$. What is the next number?", 
     "expectedanswer": {"Nästa tal är": "{{start+4*dist}}"},
     "variables": {
     "start": [1,10],
     "dist": [1,5]
   },
     "error": {
-        "message": "Inte riktigt rätt. Titta på hur mycket det skiljer mellan två tal som står bredvid varandra. Räkna minus!"
+        "message": "Not quite right. Look at the difference between two numbers - is it always the same?"
     }
 }
