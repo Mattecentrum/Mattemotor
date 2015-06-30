@@ -16,6 +16,6 @@
 	"expectedanswer": {
 		"question":"{{B}}"
 	},
-	"error": { "message": ""},
+	"error": { "message": "Inte riktigt rätt."},
 	"id":8354
 }
