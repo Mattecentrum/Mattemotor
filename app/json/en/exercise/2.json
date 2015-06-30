@@ -1,7 +1,7 @@
 {
-  "name": "Placera punkter", 
+  "name": "Place points", 
   "inputtype": "graph", 
-  "exercise": "Placera punkten A i origo och punkten B i {{ q==1 ? 'första' : q==2 ? 'andra' : q==3 ? 'tredje' : 'fjärde' }} kvadranten.",
+  "exercise": "Put the point A in origo and the point B in the {{ q==1 ? 'first' : q==2 ? 'second' : q==3 ? 'third' : 'fourth' }} quadrant.",
   "variables": { "q" : [1,4] },
   "graph": {
     "points": {
@@ -25,6 +25,6 @@
    
   "error": {
 
-      "message": "I origo är både x och y 0, första kvadranten är längst upp till vänster"
+      "message": "Not quite right. Remember: In origo both x and y equal 0. The first quadrant is the top-right quadrant."
   }
 }
