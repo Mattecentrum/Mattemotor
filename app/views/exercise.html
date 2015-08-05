@@ -57,20 +57,20 @@
         </div>
     </div>
 
-    <div data-ng-controller="AnswerCtrl">
+    <div>
 
-        <div data-ng-show='$parent.Error && !$parent.Cheated' class="clearfix">
+        <div data-ng-show='Error && !Cheated' class="clearfix">
             <div class="info cssarrow up">
                 <h2>
                     <span class="incorrect">{{ 'WRONG' | translate }}</span>
                     <span>&ndash;{{ 'TRYAGAIN' | translate }}</span>
                 </h2>
 
-                <p math-jax data-ng-bind-html-unsafe="exercise.error.message"></p>
+                <p math-jax data-ng-bind-html="exercise.error.message"></p>
             </div>
         </div>
 
-        <div data-ng-if='$parent.Correct' class="clearfix">
+        <div data-ng-if='Correct' class="clearfix">
             <div class="info cssarrow up">
                 <h2>
                     <span class="correct" ng-bind-html="'CORRECT' | translate "></span>
@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        <div class="clearfix navbuttons" data-ng-if='($parent.Correct || $parent.Cheated) || ($parent.Error && exercise.inputtype == "graph") && !last'>
+        <div class="clearfix navbuttons" data-ng-if='(Correct || Cheated) || (Error && exercise.inputtype == "graph") && !last'>
             <div class="center">
                 <div>
 

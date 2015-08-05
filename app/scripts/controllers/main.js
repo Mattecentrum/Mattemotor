@@ -16,8 +16,6 @@ angular.module('mattemotorApp')
       
             $translate.use($routeParams.language);
 
-            console.log($scope.language, $routeParams.language);
-
             if ($routeParams.listId && ($scope.listId !== $routeParams.listId || $scope.language !== $routeParams.language) ) {
                 exerciseList.Load({ listId: $routeParams.listId, language: $routeParams.language }, function(data) {
                     

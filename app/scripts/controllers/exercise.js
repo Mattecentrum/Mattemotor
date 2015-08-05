@@ -9,8 +9,8 @@
  */
 angular.module('mattemotorApp')
   .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', '$translate', 'exercise', 'typeResolver', 'progress',
-  	function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, exercise, typeResolver, progress) {
-    
+    function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, exercise, typeResolver, progress) {
+
     function initExercise(data) {
          //Setup answer model so we can keep track of correct answers
         $translate.use($routeParams.language);
@@ -32,15 +32,15 @@ angular.module('mattemotorApp')
                 data.multichoice[name].options = shuffle(data.multichoice[name].options);
             }
         }
-       
+
         $scope.exercise.exercise = $sce.trustAsHtml(data.exercise);
     }
-    
+
     //Load exercise
     $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId, language: $routeParams.language }, initExercise);
     
     function setVariables(variables) {
-       
+
         if(!variables) {
             return;
         }
@@ -444,4 +444,17 @@ angular.module('mattemotorApp')
         });
     };
 
-  }]);
+    $scope.next = function() {
+        var path = $location.$$path, 
+            segments = path.split('/');
+
+        if (pager.last()) {
+            //remove last item
+            segments.pop();
+            segments.push('result');
+            $location.path(segments.join('/'));
+        } else {
+            pager.next();
+        }
+    };
+}]);
