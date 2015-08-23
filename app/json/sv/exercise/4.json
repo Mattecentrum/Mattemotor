@@ -1,23 +1,24 @@
 {
-    "name": "Ettans tabell", 
+    "id": "4",
+    "name": "Ettans tabell",
     "inputtype": "dropdown",
-    "exercise": "Para ihop rätt uträkning med rätt svar.", 
+    "exercise": "Para ihop rätt uträkning med rätt svar.",
     "variables": {
         "A": [4,6],
         "B": [1,3],
         "C": [7,9]
     },
-    "multichoice": {     
+    "multichoice": {
         "question1": {
-            "question": "\\(1 \\cdot {{A}}\\)", 
+            "question": "\\(1 \\cdot {{A}}\\)",
             "options": ["{{A}}", "{{A+2}}", "{{A+4}}"]
         },
         "question2": {
-            "question": "\\({{B}} \\cdot 1\\)", 
+            "question": "\\({{B}} \\cdot 1\\)",
             "options": ["{{B}}", "{{B+2}}", "{{B*2}}"]
         },
         "question3": {
-            "question": "\\(1 \\cdot {{C}}\\)", 
+            "question": "\\(1 \\cdot {{C}}\\)",
             "options": ["{{C}}", "{{C+2}}", "{{C*2}}"]
         }
     },

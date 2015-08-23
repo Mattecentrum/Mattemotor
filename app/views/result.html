@@ -1,8 +1,8 @@
-<div data-ng-controller="ExerciseResultCtrl">
+<div data-ng-controller="ResultCtrl">
     <!-- Feedback efter sista uppgift -->
     <div class="definition cssarrow">
-        <h1>{{ translateText.donewiththeexecices }}</h1>
-        <p>{{ translateText.youhad }} {{nrOfCorrectAnswers}} {{ translateText.of }} {{nrOfExercises}} {{ translateText.correct }}.</p>
+        <h1>{{ 'CHAPTER_EXERCISES_FINISHED' | translate }}</h1>
+        <p data-ng-bind-html="resultMessage"></p>
     </div>
 
     <div class="interaction">
@@ -10,11 +10,11 @@
             <div class="center">
                 <div>
                     <!-- Ska starta om från ettan -->
-                    <button type="button" data-ng-click="redo()" class="button gray wide">{{ translateText.dotheexerciseagain }}</button>
+                    <button type="button" data-ng-click="redo()" class="button gray wide" data-ng-bind-html="'REDO_EXERCISES' | translate"></button>
                 </div>
                 <div>
                     <!-- Ska gå till nästa avsnitt i Umbraco -->
-                    <button type="button" data-ng-click="next()" class="button gray wide">{{ translateText.nextchapter }}: {{ exercises.next.name }}</button>
+                    <button type="button" data-ng-click="next()" class="button gray wide" data-ng-bind-html="('NEXT_CHAPTER' | translate) + ': ' +  exercises.next.name "></button>
                 </div
             </div>
         </div>

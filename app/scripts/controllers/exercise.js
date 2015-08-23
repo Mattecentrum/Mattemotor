@@ -8,13 +8,12 @@
  * Controller of the mattemotorApp
  */
 angular.module('mattemotorApp')
-  .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', '$translate', 'exercise', 'typeResolver', 'progress',
-    function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, exercise, typeResolver, progress) {
+  .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', '$translate', '$location', 'exercise', 'typeResolver', 'progress', 'pager',
+    function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, $location, exercise, typeResolver, progress, pager) {
 
     function initExercise(data) {
-         //Setup answer model so we can keep track of correct answers
-        $translate.use($routeParams.language);
 
+         //Setup answer model so we can keep track of correct answers
         $scope.answer = {};
         $scope.mathVars = {};
         
@@ -39,14 +38,18 @@ angular.module('mattemotorApp')
     //Load exercise
     $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId, language: $routeParams.language }, initExercise);
     
+    
+    
     function setVariables(variables) {
+        var variable,
+            range;
 
         if(!variables) {
             return;
         }
 
-       for (var variable in variables) {
-            var range = variables[variable];
+       for (variable in variables) {
+            range = variables[variable];
             //If the value is of type array i.e from - to
             if (typeResolver.typeOf(range) === 'array') {
                 $scope.mathVars[variable] = randomize(range[0], range[1]);
@@ -240,26 +243,30 @@ angular.module('mattemotorApp')
     };
 
     function createFunc(str) {
-        var varNames = [];
+        var varNames = [],
+            i,
+            toFunc,
+            mathed,
+            args,
+            func;
+
         $scope.mathValues = [];
 
-        for (var i in $scope.mathVars) {
+        for (i in $scope.mathVars) {
             varNames.push(i);
             $scope.mathValues.push($scope.mathVars[i]);
         }
 
         varNames.push('answer');
+        args = varNames.slice(0);
+        
+        toFunc = new $window.ToFunc();
 
-        var toFunc = new $window.ToFunc();
+        mathed = toFunc.Parse(str).replace(/\\/g, '\\\\');
 
-        var mathed = toFunc.Parse(str);
-
-        mathed = mathed.replace(/\\/g, '\\\\');
-
-        var args = varNames.slice(0);
         args.push(mathed);
 
-        var func = Function.apply(null, args);
+        func = Function.apply(null, args);
 
         return func;
     }
@@ -450,6 +457,7 @@ angular.module('mattemotorApp')
 
         if (pager.last()) {
             //remove last item
+            segments.pop();
             segments.pop();
             segments.push('result');
             $location.path(segments.join('/'));

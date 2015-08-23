@@ -53,7 +53,7 @@ angular.module('mattemotorApp')
             } else if (exercise.correct) {
                 result.push('correct');
             }
-
+           
             return result;
         };
        
@@ -79,9 +79,10 @@ angular.module('mattemotorApp')
 
         $scope.updateProgress = function() {
             var currentProgress = progress.GetProgress(),
-                exercises = $scope.exercises.exercises;
+                exercises = $scope.exercises.exercises,
+                i;
 
-            for (var i = 0; i < exercises.length; i++) {
+             for (i = 0; i < exercises.length; i++) {
                 
                 //Todo clean this should not be needed
                 if (!currentProgress[exercises[i].id]) {

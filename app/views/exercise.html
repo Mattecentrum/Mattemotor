@@ -63,7 +63,7 @@
             <div class="info cssarrow up">
                 <h2>
                     <span class="incorrect">{{ 'WRONG' | translate }}</span>
-                    <span>&ndash;{{ 'TRYAGAIN' | translate }}</span>
+                    <span data-ng-bind-html="'TRYAGAIN' | translate"></span>
                 </h2>
 
                 <p math-jax data-ng-bind-html="exercise.error.message"></p>
@@ -73,9 +73,9 @@
         <div data-ng-if='Correct' class="clearfix">
             <div class="info cssarrow up">
                 <h2>
-                    <span class="correct" ng-bind-html="'CORRECT' | translate "></span>
+                    <span class="correct" data-ng-bind-html="'CORRECT' | translate "></span>
                 </h2>
-                <p math-jax>{{exercise.correct.message}}</p>
+                <p math-jax data-ng-bind-html="exercise.correct.message"></p>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
             <div class="center">
                 <div>
 
-                    <button class="button gray" data-ng-click="next()" type="button" ng-bind-html="'NEXTEXERCISE' | translate"></button>
+                    <button class="button gray" data-ng-click="next()" type="button" data-ng-bind-html="'NEXTEXERCISE' | translate"></button>
                 </div>
             </div>
         </div>

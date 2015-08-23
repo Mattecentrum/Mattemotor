@@ -1,4 +1,5 @@
 {
+  "id": "2",
   "name": "Place points", 
   "inputtype": "graph", 
   "exercise": "Put the point A in origo and the point B in the {{ q==1 ? 'first' : q==2 ? 'second' : q==3 ? 'third' : 'fourth' }} quadrant.",

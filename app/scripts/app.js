@@ -24,7 +24,10 @@ angular
             .when('/:language/list/:listId/exercise/:exerciseId', {
               templateUrl: '/views/exercise.html',
               controller: 'ExerciseCtrl',
-              controllerAs: 'book'
+            })
+            .when('/:language/list/:listId/result', {
+                templateUrl: '/views/result.html',
+                controller: 'ResultCtrl',
             })
         .otherwise({
             redirectTo: '/sv/list/1/exercise/1'
@@ -37,7 +40,11 @@ angular
             SHOWANSWER : 'Visa svaret',
             WRONG : 'Fel',
             TRYAGAIN : 'Prova igen',
-            CORRECT : 'Rätt!'
+            REDO_EXERCISES: 'Gör uppgifterna igen',
+            NEXT_CHAPTER: 'Nästa avdelning',
+            CORRECT : 'Rätt!',
+            CHAPTER_EXERCISES_FINISHED: '',
+            RESULT_MESSAGE: 'Du hade {{numberOfCorrectAnswers}} ut av {{numberOfExercises}} rätt',
         });
 
         $translateProvider.translations('en', {
@@ -47,7 +54,25 @@ angular
             SHOWANSWER : 'Show the correct answer',
             WRONG : 'Wrong',
             TRYAGAIN : 'Try again',
-            CORRECT : 'Correct!'
+            REDO_EXERCISES: 'Do exercises again',
+            NEXT_CHAPTER: 'Next chapter',
+            CORRECT : 'Correct!',
+            CHAPTER_EXERCISES_FINISHED: '',
+            RESULT_MESSAGE: 'You had {{numberOfCorrectAnswers}} out of {{totalNumberOfExercises}} correct',
+        });
+
+        $translateProvider.translations('da', {
+            EXERCISES : 'Opgaver:',
+            NEXTEXERCISE : 'Næste opgave',
+            DONE : 'Svar',
+            SHOWANSWER : 'Se svaret',
+            WRONG : 'Forkert',
+            TRYAGAIN : 'Prøv igen',
+            REDOEXERCISES: 'Lav opgaven igen',
+            NEXTCHAPTER: 'Næste afsnit',
+            CORRECT : 'Korrekt!',
+            CHAPTER_EXERCISES_FINISHED: '',
+            RESULT_MESSAGE: 'Du havde {{numberOfCorrectAnswers}} ud af {{totalNumberOfExercises}} korrekt',
         });
 
         $translateProvider.useSanitizeValueStrategy('sanitize');

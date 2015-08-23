@@ -1,4 +1,5 @@
 {
+  "id", "5",
   "name": "Exponential function", 
   "inputtype": "multifield",
   "inputformat" : "\\( f(x) = \\)[[field1]] \\( \\cdot {{a}}^x \\)",

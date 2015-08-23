@@ -14,7 +14,7 @@ angular.module('mattemotorApp')
             SetCurrent: function (list) {
                 self.currentList = list;
             },
-
+            
             GetCurrent: function () {
                 return self.currentList;
             },
