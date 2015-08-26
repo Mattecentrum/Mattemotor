@@ -7,7 +7,7 @@ describe('Service: pager', function () {
 
   // instantiate service
   var pager, location, exerciseList;
-  
+
   beforeEach(inject(function (_pager_, _$location_, _exerciseList_) {
     pager = _pager_;
     exerciseList = _exerciseList_;
@@ -21,7 +21,6 @@ describe('Service: pager', function () {
               {"id":"5","name":"Dela upp tal"}
             ]
         };
-
     };
     location = _$location_;
     location.$$path = "/list/1/exercise/2";

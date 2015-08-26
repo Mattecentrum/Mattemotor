@@ -13,9 +13,10 @@ angular.module('mattemotorApp')
             next: function () {
                 var exercises = exerciseList.GetCurrent().exercises,
                     segments = $location.$$path.split('/'),
-                    current = segments[segments.length - 1];
+                    current = segments[segments.length - 1],
+                    i;
 
-                for (var i = exercises.length - 1; i >= 0; i--) {
+                for (i = exercises.length - 1; i >= 0; i--) {
                     if (exercises[i].id === current) {
                         if (i <= exercises.length - 2) {
                             segments[segments.length - 1] = exercises[i + 1].id;
@@ -38,16 +39,9 @@ angular.module('mattemotorApp')
             //Needs comments because very unclear what happens here. 
             last: function () {
                 var exercises = exerciseList.GetCurrent().exercises,
-                    segments = $location.$$path.split('/'),
-                    current = segments[segments.length - 1];
-
-                for (var i = 0; i < exercises.length; i++) {
-                   if (exercises[i].id === current) {
-                        return (i === exercises.length - 1);
-                    }
-                }
-
-                throw 'Error, not last but...';
+                    segments = $location.$$path.split('/');
+               
+                return exercises.pop().id === segments.pop();
             }
         };
     }]);

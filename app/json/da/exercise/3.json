@@ -1,0 +1,14 @@
+{
+    "id", "3",
+    "name": "Vilket är nästa tal", 
+    "inputtype": "field",
+    "exercise": "De första talen i en talserie är: {{start}}, {{start+dist}}, {{start+2*dist}}, {{start+3*dist}}. Vilket är nästa tal?", 
+    "expectedanswer": {"Nästa tal är": "{{start+4*dist}}"},
+    "variables": {
+    "start": [1,10],
+    "dist": [1,5]
+  },
+    "error": {
+        "message": "Inte riktigt rätt. Titta på hur mycket det skiljer mellan två tal som står bredvid varandra. Räkna minus!"
+    }
+}
