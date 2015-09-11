@@ -19,22 +19,12 @@ angular.module('mattemotorApp')
                 return self.currentList;
             },
 
-            Load: function (listId, language, callback) {
-                
+            Load: function (options, callback) {
                 var call = $resource('json/:language/list/:listId.json', {}, {
                     query: { method: 'GET', params: { listId: 'all', language: 'all' }, isArray: true }
-                }).$promise.then(
-                    function (response) {
-                        self.currentList = response;
-                        callback(response);
-                    },
-                    function function_name (error) {
-                           throw error
-                    }   
+                });
 
-                );
-
-                call.get(listId, language, function (data) {
+                call.get(options, function (data) {
                     self.currentList = data;
                     callback(data);
                 });
