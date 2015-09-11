@@ -29,9 +29,13 @@ angular
                 templateUrl: '/views/result.html',
                 controller: 'ResultCtrl',
             })
-        .otherwise({
-            redirectTo: '/sv/list/1/exercise/1'
-        });
+            .when('/:language/list/:listId', {
+              templateUrl: '/views/exercise.html',
+              controller: 'MainCtrl',
+            })
+            .otherwise({
+                redirectTo: '/sv/list/1'
+            });
         
         $translateProvider.translations('sv', {
             EXERCISES : 'Övningsuppgifter:',

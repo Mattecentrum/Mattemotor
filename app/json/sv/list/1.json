@@ -7,7 +7,7 @@
     "className": "Talen 0–1000",
     "language": "sv",
     "exercises":[
-        {"id":"1","name":"Vilket är störst"},
+        {"id":"first","name":"Vilket är störst"},
         {"id":"2","name":"Vilket är nästa tal"},
         {"id":"3","name":"Vilket är minst"},
         {"id":"4","name":"Rätt ordning"},

@@ -8,17 +8,14 @@
  * Controller of the mattemotorApp
  */
 angular.module('mattemotorApp')
-    .controller('MainCtrl', ['$scope', '$route', '$routeParams', '$location', '$translate', 'pager', 'exerciseList', 'progress', function($scope, $route, $routeParams, $location, $translate, pager, exerciseList, progress) {
+    .controller('MainCtrl', ['$rootScope', '$scope', '$route', '$routeParams', '$location', '$translate', 'pager', 'exerciseList', 'progress', function($rootScope, $scope, $route, $routeParams, $location, $translate, pager, exerciseList, progress) {
        
         $scope.exercises = {};
-
-        $scope.$on('$routeChangeSuccess', function() {
-      
-            $translate.use($routeParams.language);
-
-            if ($routeParams.listId && ($scope.listId !== $routeParams.listId || $scope.language !== $routeParams.language) ) {
-                exerciseList.Load({ listId: $routeParams.listId, language: $routeParams.language }, function(data) {
-                    
+        
+        $rootScope.$on('$routeChangeSuccess', function() {
+            $translate.use($routeParams.language);  
+            //Not we reload unnecessary          
+            exerciseList.Load({ listId: $routeParams.listId, language: $routeParams.language }, function(data) {
                     //the property listid
                     for (var i = 0; i < data.exercises.length; i++) {
                         data.exercises[i].listId = $routeParams.listId;
@@ -26,19 +23,13 @@ angular.module('mattemotorApp')
                    
                     $scope.listId = $routeParams.listId;
                     $scope.language = $routeParams.language;
-
                     $scope.exercises = data;
-
                     $scope.setCurrentExercise();
-
-                    //Load the first exercise if only list
+                    //Load the first exercise if not defined in url
                     if (!$routeParams.exerciseId) {
                         pager.goTo(0);
                     }
-                });
-            }   
-
-            $scope.setCurrentExercise();
+            });
         });
         
         $scope.getClass = function(exercise) {
@@ -73,7 +64,6 @@ angular.module('mattemotorApp')
             if ($scope.exercises === undefined){
                 return;
             } 
-
             $scope.updateProgress();
         });
 

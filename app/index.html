@@ -22,24 +22,23 @@
 
         <!-- Add your site or application content here -->
         <div class="mathexerciseengine exercise" data-ng-app="mattemotorApp">
-        <div class="box" style="border-top-color:#e3a50c" data-ng-controller="MainCtrl as main">
-            <div class="breadcrumb">
-                <span ng-bind-html="'EXERCISES' | translate"></span>
-                <a href="{{exercises.educationFolderUrl}}">{{exercises.educationFolderName}}</a> / <a href="{{exercises.sectionUrl}}">{{exercises.sectionName}}</a> / <a href="{{exercises.classUrl}}">{{exercises.className}}</a> 
-            </div>
-            <div class="monitor clearfix">
-        
-                <div class="center">
-                  <div>
-                    <a data-ng-repeat="exercise in exercises.exercises track by exercise.id" href="#{{$parent.exercises.language}}/list/{{exercise.listId}}/exercise/{{exercise.id}}" data-ng-class="getClass(exercise)"></a>
-                  </div>
+            <div class="box" style="border-top-color:#e3a50c" data-ng-controller="MainCtrl as main">
+                <div class="breadcrumb">
+                    <span ng-bind-html="'EXERCISES' | translate"></span>
+                    <a href="{{exercises.educationFolderUrl}}">{{exercises.educationFolderName}}</a> / <a href="{{exercises.sectionUrl}}">{{exercises.sectionName}}</a> / <a href="{{exercises.classUrl}}">{{exercises.className}}</a> 
                 </div>
-            </div>
+                <div class="monitor clearfix">
+                    <div class="center">
+                        <div>
+                            <a data-ng-repeat="exercise in exercises.exercises track by exercise.id" href="#{{$parent.exercises.language}}/list/{{exercise.listId}}/exercise/{{exercise.id}}" data-ng-class="getClass(exercise)"></a>
+                        </div>
+                    </div>
+                </div>
 
-            <div data-ng-view>
+                <div data-ng-view>
+                </div>
+             </div>
         </div>
-    </div>
-</div>
          <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
          <script>

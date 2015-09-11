@@ -35,10 +35,9 @@ angular.module('mattemotorApp')
         $scope.exercise.exercise = $sce.trustAsHtml(data.exercise);
     }
 
+    
     //Load exercise
     $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId, language: $routeParams.language }, initExercise);
-    
-    
     
     function setVariables(variables) {
         var variable,

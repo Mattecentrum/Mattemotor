@@ -16,6 +16,8 @@ angular.module('mattemotorApp')
                     current = segments[segments.length - 1],
                     i;
 
+                //Note use $route or $routParams to get the current exerciseId
+
                 for (i = exercises.length - 1; i >= 0; i--) {
                     if (exercises[i].id === current) {
                         if (i <= exercises.length - 2) {
@@ -29,14 +31,23 @@ angular.module('mattemotorApp')
 
             goTo: function (index) {
                 var exercises = exerciseList.GetCurrent().exercises,
-                    segments = $location.$$path.split('/');
-
-                segments[segments.length - 1] = exercises[index].id;
+                    segments = $location.$$path.split('/'),
+                    url,
+                    language,
+                    listId,
+                    exerciseId;
                 
-                $location.path(segments.join('/'));
+                language = segments[1];
+                listId = segments[3];
+                exerciseId = exercises[index].id;
+               
+                url = '/' + language + '/list/' + listId + '/exercise/' + exerciseId;
+
+                $location.path(url);
             },
 
             //Needs comments because very unclear what happens here. 
+            //Refactor name to IsLast() or equal
             last: function () {
                 var exercises = exerciseList.GetCurrent().exercises,
                     segments = $location.$$path.split('/');
