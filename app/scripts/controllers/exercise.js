@@ -22,7 +22,7 @@ angular.module('mattemotorApp')
         eachRecursive($scope.exercise);
 
         for (var a in $scope.exercise.expectedanswer) {
-            $scope.answer[a] = { 'Answer': '', 'Correct': false, 'Error': false };
+            $scope.answer[a] = { 'Answer': null, 'Correct': false, 'Error': false };
         }
 
         //shuffle options if contains multichoice
@@ -217,12 +217,23 @@ angular.module('mattemotorApp')
         return $scope.GetAnswerClass({ Error: $scope.Error, Correct: $scope.Correct });
     };
 
-    $scope.SetAnswerForButton = function(exercise, option) {
-        option = new String(option).toString();
 
-        exercise.Correct = false;
-        exercise.Error = false;
-        exercise.Answer = option;
+    $scope.SetAnswerForButton = function(answer, option) {
+        option = new String(option).toString();
+        
+        answer.Correct = false;
+        answer.Error = false;
+        answer.Answer = option;
+    };
+
+    $scope.SetToSequence = function(answer, option) {
+        
+        if(answer.Answer == null) {
+            answer.Answer = [];
+        }
+
+        option = new String(option).toString();
+        answer.Answer.push(option);
     };
 
     $scope.GetClassesForButton = function(exercise, option) {
@@ -347,17 +358,23 @@ angular.module('mattemotorApp')
         var type = typeResolver.typeOf(predefinedAnswer);
 
         if (type === 'array') {
+            
             args = $scope.mathValues.slice(0);
             args.push(givenAnswer);
 
+            var arr = [];
+
             for (var i = 0; i < predefinedAnswer.length; i++) {
                 tmp = predefinedAnswer[i].apply(null, args);
-
+                
                 if (tmp === givenAnswer.Answer) {
                     equal = true;
                     break;
                 }
             }
+            //Simple array compare, could be switched for something faster
+            equal = JSON.stringify(givenAnswer.Answer)==JSON.stringify(a2)
+
         } else if (type === 'object') {
             equal = true;
             for (var propertyName in predefinedAnswer) {
@@ -399,13 +416,14 @@ angular.module('mattemotorApp')
 
     $scope.verify = function(answer) {
         var givenAnswers = [];
-
+       
         for (var propertyName in $scope.exercise.expectedanswer) {
             var predefinedAnswer = $scope.exercise.expectedanswer[propertyName],
                 givenAnswer = answer[propertyName],
                 equal = answersEqual(givenAnswer, predefinedAnswer);
 
             givenAnswers.push(givenAnswer);
+            
             //If the exercise is incorrect we check the exercise if there is a match for the specific error
             //else default error message if any
             if (!equal && $scope.exercise.error.definederrors !== undefined) {

@@ -10,6 +10,7 @@
         <div id="box" graph="point" class="jxgbox chart" data-ng-class="GetClassForGraph()">
         </div>
     </div>
+    
     <div data-ng-switch on="exercise.inputtype" data-ng-class="{'additional':exercise.graph != null}">
         <!-- Using  -->
         <div data-ng-switch-when="field" class="clearfix">
@@ -34,13 +35,32 @@
                 </div>
             </div>
         </div>
+
         <div data-ng-switch-when="button" class="clearfix">
             <div class="center">
+               
                 <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
                     <!--Knapparna (.gray) ska toggla selected -->
                     <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
                         <span></span>
                         <button type="button" data-ng-click="SetAnswerForButton($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-ng-switch-when="sequence" class="clearfix">
+            
+            <div class="center">
+             
+                <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
+                    <!--Knapparna (.gray) ska toggla selected -->
+                    <span> Sekvens: {{ $parent.$parent.answer[name].Answer }}</span>
+
+                    <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
+                        <span></span>
+                        <button type="button" data-ng-click="SetToSequence($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
                         <span></span>
                     </div>
                 </div>

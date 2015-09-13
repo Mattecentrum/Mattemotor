@@ -27,7 +27,7 @@ describe('Service: pager', function () {
     location.path = function(newPath) {
         location.$$path = newPath;
     };
-  }));
+    }));
 
     it('should return next exercise url', function () {
         pager.next();
@@ -36,7 +36,6 @@ describe('Service: pager', function () {
 
     it('should return exerciseurl on index', function () {
         pager.goTo(3)
-        console.log("location.path", location.$$path);
         expect(location.$$path).toBe("/sv/list/1/exercise/4");
     });
 
