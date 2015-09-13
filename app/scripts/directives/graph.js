@@ -163,7 +163,7 @@ angular.module('mattemotorApp')
 
         var options = exercise.graph.options || {};
 
-        //defaults
+        //defaults rewrite with || but test first
         if (!options.grid) {
             options.grid = true;
         }
@@ -217,8 +217,10 @@ angular.module('mattemotorApp')
                 } else {
                     for (var i = 0; i < obj[elem].value.length; i++) {
                         var elemName = obj[elem].value[i]; //If the number is typed in as string we need to convert it to an int
+                        
+                        //Check if it is a number, and always convert
                         if (!isNaN(elemName)) {
-                            obj[elem].value[i] = elemName;
+                            obj[elem].value[i] = parseFloat(elemName);
                         }
 
                         //Find the other elements by name and assign instead of variablename
@@ -227,6 +229,7 @@ angular.module('mattemotorApp')
                         }
                     }
                 }
+                
                 var options = obj[elem].options || {};
                 options.name = elem;
                 var graphElem = scope.board.create(JSXGraphOption.JSXGraphName, obj[elem].value, options);

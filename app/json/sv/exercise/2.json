@@ -7,7 +7,7 @@
   "graph": {
     "points": {
       "A" : {
-        "value": [-9,9],
+        "value": ["-9","9"],
         "options" : {"infoboxDigits": "none","snapToGrid":true,"size":7,"snapSizeX":1,"snapSizeY":1,"fillColor":"#149cd1","strokeColor":"#149cd1","showInfobox":false}
               },
       "B" : {
