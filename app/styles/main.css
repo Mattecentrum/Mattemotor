@@ -143,6 +143,10 @@
 	.mathexerciseengine .definition p { margin:10px 0 0; font-size:18px; line-height: 25px;}
 	.mathexerciseengine .definition p + img { margin:20px 0 5px; }
 	
+	.mathexerciseengine .definition table { margin: 45px; text-align: left; border-collapse: collapse;}
+	.mathexerciseengine .definition th { padding: 8px 2px; font-weight: normal; border-bottom: 2px solid #000; border-right: 30px solid #fff;border-left: 30px solid #fff;}
+	.mathexerciseengine .definition td { padding: 12px 2px 0px 2px; border-right: 30px solid #fff; border-left: 30px solid #fff;}
+
 	.mathexerciseengine .chart {margin:0 auto; width:510px; height:510px; border:10px solid #e7e7e7; background:#fff; position:relative; }
 	
     .mathexerciseengine .chart.correct { border-color:#1fe235; }

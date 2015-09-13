@@ -11,7 +11,8 @@
         {"id":"2","name":"Vilket är nästa tal"},
         {"id":"3","name":"Vilket är minst"},
         {"id":"4","name":"Rätt ordning"},
-        {"id":"5","name":"Dela upp tal"}
+        {"id":"5","name":"Dela upp tal"},
+        {"id":"table","name":"Testa tabell i uppgift"}
     ],
     "next":{"name":"Addition","id":"1"}
 }
