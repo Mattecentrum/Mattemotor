@@ -36,7 +36,8 @@ angular.module('mattemotorApp')
                     language,
                     listId,
                     exerciseId;
-                
+                //Note use $route or $routParams to get the current exerciseId
+
                 language = segments[1];
                 listId = segments[3];
                 exerciseId = exercises[index].id;

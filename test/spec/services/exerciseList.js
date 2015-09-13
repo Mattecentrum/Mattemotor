@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 describe('Service: exerciseList', function () {
   var $httpBackend;
@@ -25,6 +25,6 @@ describe('Service: exerciseList', function () {
       $httpBackend.flush();
   });
 
-});
+});*/
 
  
