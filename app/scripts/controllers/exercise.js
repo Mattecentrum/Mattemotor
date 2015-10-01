@@ -18,7 +18,6 @@ angular.module('mattemotorApp')
         $scope.mathVars = {};
         
         setVariables(data.variables);
-        evaluateExpectedAnswer($scope.exercise);
         eachRecursive($scope.exercise);
 
         for (var a in $scope.exercise.expectedanswer) {
@@ -56,59 +55,6 @@ angular.module('mattemotorApp')
                 $scope.mathVars[variable] = range;
             }
         }   
-    }
-
-    /*Execepcted answer is configured to be an anynoumous func*/
-    function evaluateExpectedAnswer(exercise) {
-        var toFunc = new $window.ToFunc(),
-            varNames = [],
-            mathed = null,
-            func = null,
-            args = [];
-
-        $scope.mathValues = [];
-
-        for (var i in $scope.mathVars) {
-            varNames.push(i);
-            $scope.mathValues.push($scope.mathVars[i]);
-        }
-
-        varNames.push('answer');
-
-        for (var key in exercise.expectedanswer) {
-            args = [];
-            var obj = exercise.expectedanswer[key];
-            var type = typeResolver.typeOf(obj);
-
-            if (type === 'array') {
-                for (var j = 0; j < obj.length; j++) {
-                    var arrayElement = obj[j];
-                    mathed = toFunc.Parse(arrayElement);
-                    mathed = mathed.replace(/\\/g, '\\\\');
-                    args = varNames.slice(0);
-                    args.push(mathed);
-                    func = Function.apply(null, args);
-                    exercise.expectedanswer[key][j] = func;
-                }
-            } else if (type === 'object') {
-                for (var prop in obj) {
-                    var propertyValue = obj[prop];
-                    mathed = toFunc.Parse(propertyValue);
-                    mathed = mathed.replace(/\\/g, '\\\\');
-                    args = varNames.slice(0);
-                    args.push(mathed);
-                    func = Function.apply(null, args);
-                    exercise.expectedanswer[key][prop] = func;
-                }
-            } else {
-                mathed = toFunc.Parse(exercise.expectedanswer[key]);
-                mathed = mathed.replace(/\\/g, '\\\\');
-                args = varNames.slice(0);
-                args.push(mathed);
-                func = Function.apply(null, args);
-                exercise.expectedanswer[key] = func;
-            }
-        }
     }
 
     function eachRecursive(obj, level, isFunctiongraphs) {
@@ -247,9 +193,7 @@ angular.module('mattemotorApp')
         var varNames = [],
             i,
             toFunc,
-            mathed,
-            args,
-            func;
+            mathed;
 
         $scope.mathValues = [];
 
@@ -259,17 +203,12 @@ angular.module('mattemotorApp')
         }
 
         varNames.push('answer');
-        args = varNames.slice(0);
         
         toFunc = new $window.ToFunc();
 
         mathed = toFunc.Parse(str).replace(/\\/g, '\\\\');
 
-        args.push(mathed);
-        console.log("args", args)
-        func = Function.apply(null, args);
-
-        return func;
+        return new Function(varNames, mathed);
     }
 
     function randomize(from, to) {
@@ -336,73 +275,8 @@ angular.module('mattemotorApp')
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    function answersEqual(givenAnswer, predefinedAnswer) {
-        var equal = false,
-            tmp = null,
-            args = [];
-
-        if (predefinedAnswer === null || typeof(predefinedAnswer) === 'undefined') {
-            throw 'Must have an answer for the exercise';
-        }
-
-        var type = typeResolver.typeOf(predefinedAnswer);
-
-        if (type === 'array') {
-            
-            args = $scope.mathValues.slice(0);
-            args.push(givenAnswer);
-
-            var arr = [];
-
-            for (var i = 0; i < predefinedAnswer.length; i++) {
-                tmp = predefinedAnswer[i].apply(null, args);
-                arr.push(tmp);
-            }
-
-            equal = equalService.arraysEqual(arr, givenAnswer.Answer);
-
-        } else if (type === 'object') {
-            equal = true;
-            for (var propertyName in predefinedAnswer) {
-                args = $scope.mathValues.slice(0);
-                args.push(givenAnswer.Answer[propertyName]);
-
-                tmp = predefinedAnswer[propertyName].apply(null, args);
-
-                if (tmp !== givenAnswer.Answer[propertyName]) {
-                    equal = false;
-                    break;
-                }
-            }
-        } else {
-            //If we replace , with . is it a number? The convert so the input to the function is a number else let it be
-            var convertedInput = isNumber(givenAnswer.Answer.toString().replace(',', '.')) ? givenAnswer.Answer.toString().replace(',', '.') : givenAnswer.Answer;
-            var inputArr = $scope.mathValues.slice(0);
-            inputArr.push(convertedInput);
-
-            var answer = predefinedAnswer.apply(null, inputArr);
-
-            if (typeResolver.typeOf(answer) === 'boolean') {
-             return answer;
-            }
-
-            //If answer is simple just check for equality and return
-            if (typeResolver.typeOf(answer) === 'number' || typeResolver.typeOf(answer) === 'string') {
-                var cleanComma = convertedInput.toString();
-                var cleanAnswer = answer.toString().replace(',', '.');
-                if (isNumber(cleanComma) && isNumber(cleanAnswer)) {
-                    return parseFloat(cleanComma) === parseFloat(cleanAnswer);
-                }
-
-                return answer === cleanComma;
-            }
-        }
-        return equal;
-    }
-
     $scope.verify = function(answer) {
-        
-        console.log("answer", answer);
+        console.log("answer", answer)
         //Broadcast to active controller to test if answer is correct
         $scope.$broadcast('verify', {
             answer: $scope.answer,
@@ -415,7 +289,7 @@ angular.module('mattemotorApp')
         for (var propertyName in $scope.exercise.expectedanswer) {
             var predefinedAnswer = $scope.exercise.expectedanswer[propertyName],
                 givenAnswer = answer[propertyName],
-                equal = answersEqual(givenAnswer, predefinedAnswer);
+                equal = equalService.isEqual($scope.mathVars, givenAnswer.Answer, predefinedAnswer);
 
             givenAnswers.push(givenAnswer);
             

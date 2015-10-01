@@ -193,5 +193,32 @@ describe('Service: equalService', function () {
 
     });
 
+     it('should hande null undefined answer', function () {
+        
+        var variables = [];
+        
+        var predefinedAnswer = 1.0;
+        
+        //Doesn't matter since answer is correct and that is evaluated as true or false and returned
+        var givenAnswer;
+
+        expect(equalService.isEqual(variables, givenAnswer, predefinedAnswer)).toBe(false);
+
+    });
+
+    it('should return correct answer', function () {
+        
+        var variables = [];
+        
+        var predefinedAnswer = "{{1 + 2}";
+        
+        //Doesn't matter since answer is correct and that is evaluated as true or false and returned
+        var givenAnswer;
+
+        expect(equalService.getCorrectAnswer(variables, predefinedAnswer)).toBe(3);
+
+    });
+
+
 
 });

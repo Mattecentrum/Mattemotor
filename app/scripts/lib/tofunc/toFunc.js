@@ -61,16 +61,10 @@ ToFunc.prototype.Parse = function (expression, scope) {
         evaluated[result[i]] = tmpMath;
 
         if(typeof(expressionCopy) === 'string' && expressionCopy.indexOf(this.expressionFinder.GetOpenToken()) != -1) {
-            
             expressionCopy = expressionCopy.replace(this.expressionFinder.GetOpenToken() + result[i] + this.expressionFinder.GetCloseToken(), '\'+ (typeof(' + evaluated[result[i]] + ') == \'number\' ? (Math.round((' + evaluated[result[i]] + ')* 100) / 100).toString().replace(".",",") : ' + evaluated[result[i]] + ') +\'');
-
-            //expressionCopy = expressionCopy.replace(this.expressionFinder.GetOpenToken() + result[i] + this.expressionFinder.GetCloseToken(), "(typeof(" + evaluated[result[i]] + ") == 'number' ? (Math.round((" + evaluated[result[i]] + ") * 100) / 100).toString().replace('.',',') : " + evaluated[result[i]] + ")");
-            expression = 'return ' + expressionCopy;
-        } else {
-            expression = "return \'" + expressionCopy + "\'";
         }
     }
-    console.log("expression", expression)
+    expression = "return \'" + expressionCopy + "\'";
     return expression.toString();
 };
 

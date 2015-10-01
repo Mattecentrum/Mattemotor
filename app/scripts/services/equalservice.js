@@ -70,6 +70,11 @@ angular.module('mattemotorApp')
         },
 
         'string' : function(actual, expected) {
+            
+            if(actual == undefined || actual == null) {
+                return false;
+            }
+
             expected = expected.toString().replace(',', '.');
             actual = actual.toString().replace(',', '.');
             
@@ -82,6 +87,7 @@ angular.module('mattemotorApp')
     };
 
      /*Execepcted answer is configured to be an anynoumous func*/
+     /*Must be split into 2 because we need one function to return correct answer*/
     function createFunctionForExpectedAnswer(mathVars, actual, expected) {
         var type = typeResolver.typeOf(expected),
             argNames = [],
@@ -111,6 +117,10 @@ angular.module('mattemotorApp')
     }
 
     function sanitizeInput(input) {
+        if(!input == null || input == undefined) {
+            input = "";
+        }
+
         var sanitized = input.toString().replace(',','.');
 
         if(isNumber(sanitized)) {
@@ -167,13 +177,22 @@ angular.module('mattemotorApp')
 
         /*Variabled must be the dictionary containing both key, value*/
         isEqual : function(variables, actual, expected) {
-            throwIfNull("expected", expected);           
+            throwIfNull("expected", expected);     
+              
             expected = createFunctionForExpectedAnswer(variables, actual,  expected);
-            
+  
             var type = typeResolver.typeOf(expected);
             
             return typeTable[type](actual, expected);
+        },
+
+        getCorrectAnswer: function(variables, expected) {
+             throwIfNull("expected", expected);     
+              
+            return createFunctionForExpectedAnswer(variables, actual,  expected);
         }
+
+
     };
 
     return service;
