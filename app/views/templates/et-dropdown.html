@@ -1,0 +1,6 @@
+  <div class="center">
+    <div>
+        <label class="cols clearfix" pair-item ng-repeat="(name,item) in $parent.exercise.multichoice" key="name" content="item" data-ng-class="{incorrect:$parent.$parent.answer[key].Error, correct:$parent.$parent.answer[key].Correct }">
+        </label>
+    </div>
+</div>

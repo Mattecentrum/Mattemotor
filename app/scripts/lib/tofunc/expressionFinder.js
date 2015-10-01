@@ -26,13 +26,14 @@ ExpressionFinder.prototype.GetCloseToken = function() {
 };
 
 ExpressionFinder.prototype.Parse = function(expr) {
-	if(typeof expr != 'string')
-		throw "expr argument must be a string";
+	if(typeof expr != 'string') {
+		return [expr];
+	}
 
 	var result = expr.match(this.pattern);
  
 	if (result == null || typeof (expr) == 'undefined') {
-	    return expr;
+	    return [expr]; //expecting return as an array
 	}
 
 	//strip open and close tokens

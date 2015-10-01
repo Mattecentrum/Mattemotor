@@ -1,0 +1,10 @@
+<div class="center" data-ng-controller="ButtonCtrl">
+    <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
+        <!--Knapparna (.gray) ska toggla selected -->
+        <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
+            <span></span>
+            <button type="button" data-ng-click="SetAnswerForButton($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
+            <span></span>
+        </div>
+    </div>
+</div>

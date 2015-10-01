@@ -17,47 +17,57 @@ function ToFunc(options) {
     this.stringExpressionFinder = new ExpressionFinder("'", "'");
 }
 
-ToFunc.prototype.Parse = function (expression, scope) {
+ToFunc.prototype.Parse = function (expression, scope) {    
     var evaluated = {},
         expressionCopy = expression,
         result = this.expressionFinder.Parse(expression);
 
-    expressionCopy = expressionCopy.replace(/'/g, "&#39;");
+    if(typeof(expressionCopy) === 'string') {
+        expressionCopy = expressionCopy.replace(/'/g, "&#39;");
+    }
 
     for (var i = 0; i < result.length; i++) {
         var tmp = result[i];
+        
         if (scope) tmp = this.replacer.Parse(scope, result[i]);
 
-        result[i] = result[i].replace(/'/g, "&#39;");
 
-        var checkIfChanges = tmp.replace(/ /g, '');
+        if(typeof(result[i]) === 'string') {
+            result[i] = result[i].replace(/'/g, "&#39;");
+        }
+
         var stringsInExpression = this.stringExpressionFinder.Parse(tmp);
 
-        if (tmp.indexOf("'") != -1) {
+        if (typeof(tmp) === 'string' && tmp.indexOf("'") != -1) {
             for (var index in stringsInExpression) {
                 if (stringsInExpression[index] == '') continue;
                 tmp = tmp.replace(stringsInExpression[index], "|" + index + "|");
             }
         }
 
-        var tmpMath = this.GetFunc(tmp);
-
-        if (tmp.indexOf("'") != -1) {
+        var tmpMath = tmp;
+        
+        if(typeof(tmp) === 'string') {
+            tmpMath = this.GetFunc(tmp);
+        }
+        
+        if (typeof(tmp) === 'string' && tmp.indexOf("'") != -1) {
             for (var index2 in stringsInExpression) {
                 if (stringsInExpression[index2] == '') continue;
                 tmpMath = tmpMath.replace("|" + index2 + "|", stringsInExpression[index2]);
             }
         }
-        /*    if (tmpMath == checkIfChanges) {
-                 evaluated[result[i]] = tmp;
-             } else {*/
+     
         evaluated[result[i]] = tmpMath;
-        /*   }*/
 
-        expressionCopy = expressionCopy.replace(this.expressionFinder.GetOpenToken() + result[i] + this.expressionFinder.GetCloseToken(), '\'+ (typeof(' + evaluated[result[i]] + ') == \'number\' ? (Math.round((' + evaluated[result[i]] + ')* 100) / 100).toString().replace(".",",") : ' + evaluated[result[i]] + ') +\'');
+        if(typeof(expressionCopy) === 'string' && expressionCopy.indexOf(this.expressionFinder.GetOpenToken()) != -1) {
+            expressionCopy = expressionCopy.replace(this.expressionFinder.GetOpenToken() + result[i] + this.expressionFinder.GetCloseToken(), "(typeof(" + evaluated[result[i]] + ") == 'number' ? (Math.round((" + evaluated[result[i]] + ") * 100) / 100).toString().replace('.',',') : " + evaluated[result[i]] + ")");
+            expression = 'return ' + expressionCopy;
+        } else {
+            expression = "return \'" + expressionCopy + "\'";
+        }
     }
 
-    expression = "return \'" + expressionCopy + "\'";
     return expression.toString();
 };
 
@@ -69,5 +79,6 @@ ToFunc.prototype.GetFunc = function (str) {
     if (str.indexOf("!") != -1) {
         return str;
     }
+
     return mathjs(str);
 };

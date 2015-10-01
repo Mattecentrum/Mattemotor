@@ -19,8 +19,8 @@
   "expectedanswer": {
       "A": {"x": "0", "y": "0"},
       "B": {
-              "x": "{{ (q==1 || q==4) &&  answer > 0  ? answer : (q==2 || q==3) && answer < 0 ? answer : answer-1   }}",
-              "y": "{{ (q==1 || q==2) &&  answer > 0  ? answer : (q==3 || q==4) && answer < 0 ? answer : answer-1 }}"
+              "x": "{{ (q==1 || q==4) &&  answer > 0 ? answer : (q==2 || q==3) && answer < 0 ? answer : answer-1  }}",
+              "y": "{{ (q==1 || q==2) &&  answer > 0 ? answer : (q==3 || q==4) && answer < 0 ? answer : answer-1 }}"
       }
  },
   "error": {

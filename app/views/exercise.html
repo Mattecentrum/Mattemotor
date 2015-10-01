@@ -12,69 +12,17 @@
     </div>
     
     <div data-ng-switch on="exercise.inputtype" data-ng-class="{'additional':exercise.graph != null}">
-        <!-- Using  -->
-        <div data-ng-switch-when="field" class="clearfix">
-            <div class="center">
-                <div>
-                    <label data-ng-repeat="(name,value) in $parent.exercise.expectedanswer" class="cols clearfix">
-                        <span>{{ $parent.evaluateExpression(name) }}</span>
+        <!-- START OF TEMPLATES prefixed with et- (exercise template)  -->
+        <div et-field data-ng-switch-when="field" class="clearfix"></div>
 
-                        <input type="text" data-ng-keydown="$parent.$parent.keypressCallback($event)" data-ng-focus="$parent.$parent.ResetField($parent.$parent.answer[name])" data-ng-click="$parent.$parent.ResetField($parent.$parent.answer[name])" id="input{{name}}" data-ng-model="$parent.$parent.answer[name].Answer" data-ng-class="GetAnswerClass($parent.$parent.answer[name])" ontouchstart="this.type='number'" onfocus="changeType(this)">
+        <div et-dropdown data-ng-switch-when="dropdown" math-jax class="clearfix"></div>
 
-                        <span>{{ exercise.answerformat }}</span>
-                    </label>
-                </div>
-            </div>
-        </div>
+        <div et-button data-ng-switch-when="button" class="clearfix"></div>
 
-        <div data-ng-switch-when="dropdown" math-jax class="clearfix">
-            <div class="center">
-                <div>
-                    <label class="cols clearfix" pair-item ng-repeat="(name,item) in $parent.exercise.multichoice" key="name" content="item" data-ng-class="{incorrect:$parent.$parent.answer[key].Error, correct:$parent.$parent.answer[key].Correct }">
-                    </label>
-                </div>
-            </div>
-        </div>
+        <div et-sequence data-ng-switch-when="sequence" class="clearfix"></div> 
 
-        <div data-ng-switch-when="button" class="clearfix">
-            <div class="center">
-               
-                <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
-                    <!--Knapparna (.gray) ska toggla selected -->
-                    <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
-                        <span></span>
-                        <button type="button" data-ng-click="SetAnswerForButton($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div data-ng-switch-when="sequence" class="clearfix">
-            
-            <div class="center">
-             
-                <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
-                    <!--Knapparna (.gray) ska toggla selected -->
-                    <span> Sekvens: {{ $parent.$parent.answer[name].Answer }}</span>
-
-                    <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
-                        <span></span>
-                        <button type="button" data-ng-click="SetToSequence($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div data-ng-switch-when="multifield" class="clearfix">
-            <div class="center" math-jax>
-                <div>
-                    <div class="cols func clearfix" multi-field>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div et-multifield data-ng-switch-when="multifield" class="clearfix"></div>
+        <!-- END OF TEMPLATES -->
     </div>
 
     <div>

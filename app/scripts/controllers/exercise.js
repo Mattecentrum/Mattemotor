@@ -8,8 +8,8 @@
  * Controller of the mattemotorApp
  */
 angular.module('mattemotorApp')
-  .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', '$translate', '$location', 'exercise', 'typeResolver', 'progress', 'pager',
-    function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, $location, exercise, typeResolver, progress, pager) {
+  .controller('ExerciseCtrl', ['$scope', '$routeParams', '$interpolate', '$rootScope',  '$filter', '$sce', '$window', '$translate', '$location', 'exercise', 'typeResolver', 'progress', 'pager', 'equalService',
+    function ($scope, $routeParams, $interpolate, $rootScope, $filter, $sce, $window, $translate, $location, exercise, typeResolver, progress, pager, equalService) {
 
     function initExercise(data) {
 
@@ -25,7 +25,7 @@ angular.module('mattemotorApp')
             $scope.answer[a] = { 'Answer': null, 'Correct': false, 'Error': false };
         }
 
-        //shuffle options if contains multichoice
+        //shuffle options if contains multichoice move to directive
         if (data.multichoice) {
             for (var name in data.multichoice) {
                 data.multichoice[name].options = shuffle(data.multichoice[name].options);
@@ -58,6 +58,7 @@ angular.module('mattemotorApp')
         }   
     }
 
+    /*Execepcted answer is configured to be an anynoumous func*/
     function evaluateExpectedAnswer(exercise) {
         var toFunc = new $window.ToFunc(),
             varNames = [],
@@ -226,16 +227,6 @@ angular.module('mattemotorApp')
         answer.Answer = option;
     };
 
-    $scope.SetToSequence = function(answer, option) {
-        
-        if(answer.Answer == null) {
-            answer.Answer = [];
-        }
-
-        option = new String(option).toString();
-        answer.Answer.push(option);
-    };
-
     $scope.GetClassesForButton = function(exercise, option) {
         var classes = [];
 
@@ -275,7 +266,7 @@ angular.module('mattemotorApp')
         mathed = toFunc.Parse(str).replace(/\\/g, '\\\\');
 
         args.push(mathed);
-
+        console.log("args", args)
         func = Function.apply(null, args);
 
         return func;
@@ -314,7 +305,6 @@ angular.module('mattemotorApp')
         return str.match(pattern);
     }
 
-    //http://docs.angularjs.org/api/ng.$interpolate could probably be used
     function evaluateExpression(value, isFunctiongraph) {
         var expressions = value,
             func,
@@ -366,14 +356,10 @@ angular.module('mattemotorApp')
 
             for (var i = 0; i < predefinedAnswer.length; i++) {
                 tmp = predefinedAnswer[i].apply(null, args);
-                
-                if (tmp === givenAnswer.Answer) {
-                    equal = true;
-                    break;
-                }
+                arr.push(tmp);
             }
-            //Simple array compare, could be switched for something faster
-            equal = JSON.stringify(givenAnswer.Answer)==JSON.stringify(a2)
+
+            equal = equalService.arraysEqual(arr, givenAnswer.Answer);
 
         } else if (type === 'object') {
             equal = true;
@@ -415,6 +401,15 @@ angular.module('mattemotorApp')
     }
 
     $scope.verify = function(answer) {
+        
+        console.log("answer", answer);
+        //Broadcast to active controller to test if answer is correct
+        $scope.$broadcast('verify', {
+            answer: $scope.answer,
+            expectedAnswer: $scope.exercise.expectedanswer,
+            mathValues: $scope.mathValues
+        });
+
         var givenAnswers = [];
        
         for (var propertyName in $scope.exercise.expectedanswer) {
@@ -467,6 +462,15 @@ angular.module('mattemotorApp')
             error: $scope.error
         });
     };
+
+    $scope.$on('verified', verified);
+
+    //Verfied after verfy is run this function is called from
+    //Child controller
+    function verified() {
+        console.log("Exercise is verified")
+    };
+
 
     $scope.next = function() {
         var path = $location.$$path, 

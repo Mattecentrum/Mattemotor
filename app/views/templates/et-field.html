@@ -1,0 +1,11 @@
+ <div class="center">
+    <div>
+        <label data-ng-repeat="(name,value) in $parent.exercise.expectedanswer" class="cols clearfix">
+            <span>{{ $parent.evaluateExpression(name) }}</span>
+
+            <input type="text" data-ng-keydown="$parent.$parent.keypressCallback($event)" data-ng-focus="$parent.$parent.ResetField($parent.$parent.answer[name])" data-ng-click="$parent.$parent.ResetField($parent.$parent.answer[name])" id="input{{name}}" data-ng-model="$parent.$parent.answer[name].Answer" data-ng-class="GetAnswerClass($parent.$parent.answer[name])" ontouchstart="this.type='number'" onfocus="changeType(this)">
+
+            <span>{{ exercise.answerformat }}</span>
+        </label>
+    </div>
+ </div>

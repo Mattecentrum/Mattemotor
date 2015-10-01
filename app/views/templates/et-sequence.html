@@ -1,0 +1,15 @@
+<div class="center" data-ng-controller="SequenceCtrl">
+    <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
+        <div> Sekvens: 
+            <span data-ng-repeat="sequenceItem in $parent.$parent.answer[name].Answer track by $index">{{ sequenceItem }} </span>
+        </div>
+        <button type="button" data-ng-click="Remove($parent.$parent.answer[name])">tabort element</button>
+        <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
+            <span></span>
+            <button type="button" data-ng-click="Add($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+
