@@ -1,0 +1,42 @@
+{
+	"id": "6",
+	"name":"Avläs funktionen",
+	"inputtype":"multifield",
+	"inputformat":"\\(k = \\)[[field1]] \\(m = \\)[[field2]]",
+	"exercise":"Nedan visas grafen för en rät linje. Fyll i rätt k-värde och m-värde i rutorna nedanför.<br>Tips! Du kan dra i punkten för att avläsa koordinater.",
+	"variables":{"k":[-3,3],"m":[-2,2]},
+	"graph":{
+		"options":{
+			"boundingbox":[-10,10,10,-10],
+			"showNavigation":true,
+			"grid":true,
+			"showCopyright":false,
+			"axis":true
+		},
+		"functiongraphs":{
+			"func1":{
+				"value":["{{k}}x+{{m}}"],
+				"options":{
+					"strokecolor":"#0000ff",
+					"strokewidth":"2",
+					"withLabel":true
+				}
+			}
+		},
+		"gliders":
+		{
+			"A":{
+				"value":["func1"]
+			}
+		},
+		"showMouseCoordinates":false
+	},
+	"expectedanswer": {
+		"field1":"{{k}}",
+		"field2":"{{m}}"
+	},
+	"error":{
+		"message":"Inte riktigt rätt."
+	}
+
+}
