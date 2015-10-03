@@ -19,11 +19,11 @@
   "expectedanswer": {
       "A": {"x": "0", "y": "0"},
       "B": {
-              "x": "{{ (q==1 || q==4) &&  answer > 0 ? answer : (q==2 || q==3) && answer < 0 ? answer : answer-1  }}",
-              "y": "{{ (q==1 || q==2) &&  answer > 0 ? answer : (q==3 || q==4) && answer < 0 ? answer : answer-1 }}"
+              "x": "{{ (q == 1 || q == 4) &&  answer > 0 ? answer : (q == 2 || q == 3) && answer < 0 ? answer : (q == 1 || q == 4) ? 5 : -5  }}",
+              "y": "{{ (q == 1 || q == 2) &&  answer > 0 ? answer : (q == 3 || q == 4) && answer < 0 ? answer : (q == 1 || q == 2) ? 5 : -5  }}"
       }
  },
   "error": {
-      "message": "I origo gäller $x=0$ och $y=0$. Första kvadranten är längst upp till vänster"
+      "message": "I origo gäller $x=0$ och $y=0$. Första kvadranten är längst upp till höger"
   }
 }

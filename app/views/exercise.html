@@ -61,7 +61,7 @@
         <div class="center">
             <div>
                 <button class="button submit" data-ng-click="verify(answer)" type="button">{{ 'DONE' | translate }}</button>
-                <button data-ng-if='Error && !Cheated && exercise.inputtype != "graph" ' data-ng-click="showAnswer()" class="button gray show" type="button">{{ 'SHOWANSWER' | translate }}</button>
+                <button data-ng-if='Error && !Cheated' data-ng-click="showAnswer()" class="button gray show" type="button">{{ 'SHOWANSWER' | translate }}</button>
             </div>
         </div>
     </div>

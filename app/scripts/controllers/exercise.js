@@ -34,7 +34,6 @@ angular.module('mattemotorApp')
         $scope.exercise.exercise = $sce.trustAsHtml(data.exercise);
     }
 
-    
     //Load exercise
     $scope.exercise = exercise.get({ exerciseId: $routeParams.exerciseId, language: $routeParams.language }, initExercise);
     
@@ -46,14 +45,9 @@ angular.module('mattemotorApp')
             return;
         }
 
-       for (variable in variables) {
+        for (variable in variables) {
             range = variables[variable];
-            //If the value is of type array i.e from - to
-            if (typeResolver.typeOf(range) === 'array') {
-                $scope.mathVars[variable] = randomize(range[0], range[1]);
-            } else {
-                $scope.mathVars[variable] = range;
-            }
+            $scope.mathVars[variable] = typeResolver.isArray(range) ? randomize(range[0], range[1]) : range;
         }   
     }
 
@@ -62,6 +56,9 @@ angular.module('mattemotorApp')
         isFunctiongraphs = isFunctiongraphs || false;
         for (var k in obj) {
            
+            //dont evaluate expected answer before we got an answer
+            if(k == "expectedanswer") continue;
+
             if (level === 2) {
                 isFunctiongraphs = k === 'functiongraphs';
             }
@@ -114,33 +111,19 @@ angular.module('mattemotorApp')
     };
 
     $scope.showAnswer = function() {
-        var expectedAnswer = '';
-        for (var propertyName in $scope.exercise.expectedanswer) {
-           expectedAnswer = '';
-            //If mathValues is empty/undefined answer push empty string
-            if ($scope.mathValues.length === 0) {
-                $scope.mathValues.push('');
-            }
+        for (var key in $scope.exercise.expectedanswer) {
+            $scope.answer[key] = {
+                Answer: equalService.getCorrectAnswer($scope.mathVars, $scope.exercise.expectedanswer[key]),
+                Correct: true,
+                Error: false
+            };
 
-            //If the answer is of type array take the first alternative since we can't show two
-            if (typeResolver.typeOf($scope.exercise.expectedanswer[propertyName]) === 'array') {
-                expectedAnswer = $scope.exercise.expectedanswer[propertyName][0].apply(null, $scope.mathValues);
-            } else {
-                expectedAnswer = $scope.exercise.expectedanswer[propertyName].apply(null, $scope.mathValues);
-
-                if ($scope.exercise.showcorrectanswer && $scope.exercise.showcorrectanswer[propertyName]) {
-                    eval('$scope.funcDynamicAnswer =' + $scope.exercise.showcorrectanswer[propertyName]);
-                    expectedAnswer = $scope.funcDynamicAnswer();
-                }
-            }
-
-            var answer = $scope.answer[propertyName];
-
-            answer.Answer = expectedAnswer;
-            answer.Correct = true;
-            answer.Error = false;
             $scope.Cheated = true;
+
+
         }
+
+        $rootScope.$broadcast('showAnswer', $scope.answer);
     };
 
     $scope.ResetField = function(exercise) {
@@ -149,21 +132,16 @@ angular.module('mattemotorApp')
     };
 
     $scope.GetAnswerClass = function(exercise) {
-        var result = [];
-
         if (exercise.Error) {
-            result.push('incorrect');
+            return ['incorrect'];
         } else if (exercise.Correct) {
-            result.push('correct');
+            return ['correct'];
         }
-
-        return result;
     };
 
     $scope.GetClassForGraph = function() {
         return $scope.GetAnswerClass({ Error: $scope.Error, Correct: $scope.Correct });
     };
-
 
     $scope.SetAnswerForButton = function(answer, option) {
         option = new String(option).toString();
@@ -175,15 +153,15 @@ angular.module('mattemotorApp')
 
     $scope.GetClassesForButton = function(exercise, option) {
         var classes = [];
-
+        
+        if (exercise.Answer === option) {
+            classes.push('selected');
+        }
+        
         if (exercise.Error) {
             classes.push('incorrect');
         } else if (exercise.Correct) {
             classes.push('correct');
-        }
-
-        if (exercise.Answer === option) {
-            classes.push('selected');
         }
 
         return classes;
@@ -257,7 +235,7 @@ angular.module('mattemotorApp')
         result = func.apply(null, $scope.mathValues);
 
         if (isFunctiongraph) {
-            
+            console.log("value", value);
             if (typeResolver.typeOf(value) === 'string' && value.indexOf('{{') >= 0 && value.indexOf('}}') >= 0) {
                 if (value.indexOf('function(') === -1 && !isFunctiongraph) {
                     value = value.replace(/}}/g, ' | number }}');
@@ -276,20 +254,15 @@ angular.module('mattemotorApp')
     }
 
     $scope.verify = function(answer) {
-        console.log("answer", answer)
-        //Broadcast to active controller to test if answer is correct
-        $scope.$broadcast('verify', {
-            answer: $scope.answer,
-            expectedAnswer: $scope.exercise.expectedanswer,
-            mathValues: $scope.mathValues
-        });
-
         var givenAnswers = [];
-       
+         console.log("predefinedAnswer", $scope.exercise.expectedanswer)
         for (var propertyName in $scope.exercise.expectedanswer) {
             var predefinedAnswer = $scope.exercise.expectedanswer[propertyName],
-                givenAnswer = answer[propertyName],
-                equal = equalService.isEqual($scope.mathVars, givenAnswer.Answer, predefinedAnswer);
+                givenAnswer = answer[propertyName];
+
+
+               
+                var equal = equalService.isEqual($scope.mathVars, givenAnswer.Answer, predefinedAnswer);
 
             givenAnswers.push(givenAnswer);
             
@@ -336,15 +309,6 @@ angular.module('mattemotorApp')
             error: $scope.error
         });
     };
-
-    $scope.$on('verified', verified);
-
-    //Verfied after verfy is run this function is called from
-    //Child controller
-    function verified() {
-        console.log("Exercise is verified")
-    };
-
 
     $scope.next = function() {
         var path = $location.$$path, 

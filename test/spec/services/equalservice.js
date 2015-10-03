@@ -210,12 +210,25 @@ describe('Service: equalService', function () {
         
         var variables = [];
         
-        var predefinedAnswer = "{{1 + 2}";
+        var predefinedAnswer = "{{1 + 2}}";
         
         //Doesn't matter since answer is correct and that is evaluated as true or false and returned
         var givenAnswer;
 
-        expect(equalService.getCorrectAnswer(variables, predefinedAnswer)).toBe(3);
+        expect(equalService.getCorrectAnswer(variables, predefinedAnswer)).toBe('3');
+
+    });
+
+     it('should return correct answer', function () {
+        
+        var variables = [];
+        
+        var predefinedAnswer = "{{ 1 + 2 }}";
+        
+        //Doesn't matter since answer is correct and that is evaluated as true or false and returned
+        var givenAnswer;
+
+        expect(equalService.getCorrectAnswer(variables, predefinedAnswer)).toBe('3');
 
     });
 

@@ -13,7 +13,8 @@
         {"id":"4","name":"Rätt ordning"},
         {"id":"5","name":"Dela upp tal"},
         {"id":"table","name":"Testa tabell i uppgift"},
-        {"id": "sequence"}
+        {"id": "sequence",  "name" : "Skapa en sekvens"},
+        {"id": "6", "name": "utläs en funktion"}
     ],
     "next":{"name":"Addition","id":"1"}
 }

@@ -10,8 +10,9 @@
 angular.module('mattemotorApp')
     .factory('typeResolver', function () {
         //Uses type of but extends with array check
-        return {
+        var struct = {
             typeOf: function (value) {
+
                 var type = typeof value;
                 if (type === 'object') {
                     if (value) {
@@ -24,6 +25,12 @@ angular.module('mattemotorApp')
                 }
 
                 return type;
-            }
-        };
+            },
+
+            isArray: function (value) {
+                return struct.typeOf(value) === 'array';
+            } 
+        }; 
+
+        return struct;
     });

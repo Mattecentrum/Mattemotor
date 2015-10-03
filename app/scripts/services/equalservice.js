@@ -94,11 +94,16 @@ angular.module('mattemotorApp')
             argValues = [],
             i,
             key;
-            
+      
         if(type === 'object' || type === 'array') {
             for (key in expected) {
                 //recursive call
-               expected[key] = createFunctionForExpectedAnswer(mathVars, actual[key], expected[key]);
+                var a = actual;
+                if(actual != null) {
+                    a = actual[key]
+                }
+
+               expected[key] = createFunctionForExpectedAnswer(mathVars, a, expected[key]);
             }
         } else { 
 
@@ -133,7 +138,6 @@ angular.module('mattemotorApp')
     function createFunc(funcBody, varNames) {
         var toFunc = new $window.ToFunc(),
             mathed = toFunc.Parse(funcBody); //.replace(/\\/g, '\\\\'),
-        
         return new Function(varNames, mathed);   
     }
 
@@ -176,9 +180,10 @@ angular.module('mattemotorApp')
         },
 
         /*Variabled must be the dictionary containing both key, value*/
+        //How do i know wich is error 
         isEqual : function(variables, actual, expected) {
             throwIfNull("expected", expected);     
-              
+ 
             expected = createFunctionForExpectedAnswer(variables, actual,  expected);
   
             var type = typeResolver.typeOf(expected);
@@ -189,10 +194,8 @@ angular.module('mattemotorApp')
         getCorrectAnswer: function(variables, expected) {
              throwIfNull("expected", expected);     
               
-            return createFunctionForExpectedAnswer(variables, actual,  expected);
+            return createFunctionForExpectedAnswer(variables, null,  expected);
         }
-
-
     };
 
     return service;

@@ -34,6 +34,19 @@ angular.module('mattemotorApp')
             }
         });
 
+       $rootScope.$on('showAnswer', function (event, msg) {
+            for (var propertyName in msg) {
+                var JSXGraphElement = scope.JSXGraphElements[propertyName];
+                
+                if (JSXGraphElement) {
+                   var arr = [parseFloat(msg[propertyName].Answer.x), parseFloat(msg[propertyName].Answer.y)];
+                   JSXGraphElement.setPosition($window.JXG.COORDS_BY_USER, arr);
+                   JSXGraphElement.setAttribute({ fillColor: '#6fe77d', strokeColor: '#6fe77d' });
+                   scope.board.fullUpdate();
+                }
+            }
+        });
+
         //graph manipulation
         scope.JSXGraphOptions = {
             'Angles': 'Angles',
@@ -247,7 +260,6 @@ angular.module('mattemotorApp')
                         if (graphElem.curveLeft && graphElem.curveRight) {
                             graphElem.curveLeft.on('drag', function () {
                                 //set answer to model
-
                                 scope.$parent.answer[graphElem.mbName].Answer = graphElem.label.content.htmlStr.split('=')[1].trim();
                             });
                             graphElem.curveRight.on('drag', function () {
