@@ -8,8 +8,11 @@
  */
 angular.module('mattemotorApp')
     .directive('multiField', function ($compile) {
+        
+        
+
         var linker = function (scope, element) {
-            var template = scope.$parent.exercise.inputformat,
+            var template = scope.$parent.inputformat,
                 index = 0,
                 tokenized = [];
             
@@ -31,8 +34,8 @@ angular.module('mattemotorApp')
             }
         
 
-            if (scope.$parent.exercise.inputformat) {
-                for (var answer in scope.$parent.exercise.expectedanswer) {
+            if (scope.$parent.inputformat) {
+                for (var answer in scope.$parent.expectedanswer) {
                     var tmp = '$parent.answer.' + answer + '.Answer';
 
                     for (var j = tokenized.length - 1; j >= 0; j--) {

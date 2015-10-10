@@ -1,27 +1,27 @@
 ﻿<div class="definition cssarrow">
-    <h1>{{ exercise.name }}</h1>    
-    <p data-math-jax ng-bind-html="exercise.exercise"></p>
-    <img alt="" ng-hide="exercise.image== undefined" ng-src="{{exercise.image}}" />
+    <h1>{{ name }}</h1>    
+    <p data-math-jax ng-bind-html="exerciseText"></p>
+    <img alt="" ng-hide="exercise.image== undefined" ng-src="{{image}}" />
 </div>
 
 <div class="interaction">
     <!--if there is a graph element in the json include a graph -->
-    <div ng-if='exercise.graph' class="clearfix">
+    <div ng-if='graph' class="clearfix">
         <div id="box" graph="point" class="jxgbox chart" data-ng-class="GetClassForGraph()">
         </div>
     </div>
-    
-    <div data-ng-switch on="exercise.inputtype" data-ng-class="{'additional':exercise.graph != null}">
+
+    <div data-ng-switch on="inputType" data-ng-class="{'additional':graph != null}">
         <!-- START OF TEMPLATES prefixed with et- (exercise template)  -->
-        <div et-field data-ng-switch-when="field" class="clearfix"></div>
+        <div et-field items='expectedanswer' answer='answer' mathVars="mathVars" data-ng-switch-when="field" class="clearfix"></div>
 
-        <div et-dropdown data-ng-switch-when="dropdown" math-jax class="clearfix"></div>
+        <div et-dropdown items="multichoice" answer="answer" data-ng-switch-when="dropdown" math-jax class="clearfix"></div>
 
-        <div et-button data-ng-switch-when="button" class="clearfix"></div>
+        <div et-button items="multichoice" answer="answer" data-ng-switch-when="button" class="clearfix"></div>
 
         <div et-sequence data-ng-switch-when="sequence" class="clearfix"></div> 
 
-        <div et-multifield data-ng-switch-when="multifield" class="clearfix"></div>
+        <div et-multifield items='expectedanswer' answer='answer' inputformat='inputformat' data-ng-switch-when="multifield" class="clearfix"></div>
         <!-- END OF TEMPLATES -->
     </div>
 

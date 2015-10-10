@@ -11,8 +11,9 @@ angular.module('mattemotorApp')
     .controller('MainCtrl', ['$rootScope', '$scope', '$route', '$routeParams', '$location', '$translate', 'pager', 'exerciseList', 'progress', function($rootScope, $scope, $route, $routeParams, $location, $translate, pager, exerciseList, progress) {
        
         $scope.exercises = {};
-        
-        $rootScope.$on('$routeChangeSuccess', function() {
+ 
+        $scope.$on('$routeChangeSuccess', function() {
+            
             $translate.use($routeParams.language);  
             //Not we reload unnecessary          
             exerciseList.Load({ listId: $routeParams.listId, language: $routeParams.language }, function(data) {
@@ -26,7 +27,7 @@ angular.module('mattemotorApp')
                     $scope.exercises = data;
                     $scope.setCurrentExercise();
                     //Load the first exercise if not defined in url
-                    if (!$routeParams.exerciseId) {
+                    if (!$routeParams.exerciseId && !pager.isResultPage()) {
                         pager.goTo(0);
                     }
             });
@@ -35,19 +36,23 @@ angular.module('mattemotorApp')
         $scope.getClass = function(exercise) {
             var result = [];
 
-            if (exercise.current) {
+            if (exercise.id == $routeParams.exerciseId) {
                 result.push('current');
             }
 
-            if (exercise.error) {
+            var status = progress.GetProgressByExerciseId(exercise.id);
+
+            if(!status) return result; 
+
+            if (status.error) {
                 result.push('incorrect');
-            } else if (exercise.correct) {
+            } else if (status.correct) {
                 result.push('correct');
             }
            
             return result;
         };
-       
+   
         $scope.setCurrentExercise = function() {
             var exercises = $scope.exercises.exercises;
             

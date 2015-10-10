@@ -1,15 +1,18 @@
-<div class="center" data-ng-controller="SequenceCtrl">
-    <div data-ng-repeat="(name,item) in $parent.exercise.multichoice">
-        <div> Sekvens: 
-            <span data-ng-repeat="sequenceItem in $parent.$parent.answer[name].Answer track by $index">{{ sequenceItem }} </span>
-        </div>
-        <button type="button" data-ng-click="Remove($parent.$parent.answer[name])">tabort element</button>
-        <div data-ng-repeat="option in item.options track by $index" class="cols clearfix">
-            <span></span>
-            <button type="button" data-ng-click="Add($parent.$parent.$parent.answer[name], option)" data-ng-class="GetClassesForButton($parent.$parent.$parent.answer[name], option)" class="button gray" compile="option">{{ option }} </button>
-            <span></span>
-        </div>
+<div class="center">
+    <div data-ng-repeat="(name, item) in buttons">
+
+        <!--Knapparna (.gray) ska toggla selected -->
+        <ul  data-as-sortable="dragControlListeners" data-ng-model="item.options">
+            <li data-ng-repeat="option in item.options" style="text-align: center;" data-as-sortable-item>
+            <div data-as-sortable-item-handle class="gray button" data-ng-class="GetClassesForButton(name, option)">
+                
+                <span compile="option" style="text-align: center;" data-ng-bind="option"></span>
+                
+            </div>
+            </li>
+        </ul>
     </div>
 </div>
+
 
 

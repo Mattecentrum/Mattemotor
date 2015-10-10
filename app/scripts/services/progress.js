@@ -9,15 +9,12 @@
  */
 angular.module('mattemotorApp')
     .factory('progress', function ($cookies, $rootScope) {
-        var exercises = $cookies.exercises,
+        var exercises = $cookies.exercises || {},
             sharedService = {};
 
         return {
            
-            AddProgress: function (exercise) {
-                //No data in cookie push
-                exercises = exercises || {};
-                 
+            AddProgress: function (exercise) { 
                 exercises[exercise.id] = exercise;
                 
                 $cookies.exercises = exercises;
@@ -34,9 +31,18 @@ angular.module('mattemotorApp')
                 sharedService.prepareForBroadcast(exercises);
             },
 
-            GetProgress: function () {
-                var exercises = $cookies.exercises;
-                return exercises;
+            GetProgress: function GetProgress() {
+                return $cookies.exercises || {};
+            },
+
+            GetProgressByExerciseId: function(id) {
+                var progress = $cookies.exercises || {};
+
+                if(progress[id]) {
+                    return progress[id];
+                } 
+
+                return undefined; 
             }
         };
     });

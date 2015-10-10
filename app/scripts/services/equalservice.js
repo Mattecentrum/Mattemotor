@@ -137,7 +137,7 @@ angular.module('mattemotorApp')
 
     function createFunc(funcBody, varNames) {
         var toFunc = new $window.ToFunc(),
-            mathed = toFunc.Parse(funcBody); //.replace(/\\/g, '\\\\'),
+            mathed = toFunc.Parse(funcBody).replace(/\\/g, '\\\\');
         return new Function(varNames, mathed);   
     }
 
@@ -183,7 +183,6 @@ angular.module('mattemotorApp')
         //How do i know wich is error 
         isEqual : function(variables, actual, expected) {
             throwIfNull("expected", expected);     
- 
             expected = createFunctionForExpectedAnswer(variables, actual,  expected);
   
             var type = typeResolver.typeOf(expected);
@@ -192,9 +191,9 @@ angular.module('mattemotorApp')
         },
 
         getCorrectAnswer: function(variables, expected) {
-             throwIfNull("expected", expected);     
-              
-            return createFunctionForExpectedAnswer(variables, null,  expected);
+            throwIfNull("expected", expected);     
+            var result = createFunctionForExpectedAnswer(variables, null,  expected);
+            return result;
         }
     };
 

@@ -143,7 +143,7 @@ angular.module('mattemotorApp')
 
         scope.createMouseCoordinates = function () {
             //If show mouse coordinates
-            if (exercise.graph.showMouseCoordinates) {
+            if (scope.graph.showMouseCoordinates) {
                 scope.mouseText = null;
                 scope.board.on('move', function (evt) {
                     var array = scope.board.getMousePosition(evt);
@@ -174,7 +174,7 @@ angular.module('mattemotorApp')
 
         var exercise = scope.$parent.exercise;
 
-        var options = exercise.graph.options || {};
+        var options = scope.$parent.graph.options || {};
 
         //defaults rewrite with || but test first
         if (!options.grid) {
@@ -246,11 +246,19 @@ angular.module('mattemotorApp')
                 var options = obj[elem].options || {};
                 options.name = elem;
                 var graphElem = scope.board.create(JSXGraphOption.JSXGraphName, obj[elem].value, options);
+                //set answer to model
+
+           
+           //     scope.$parent.answer[graphElem.mbName].Answer = { 'x': graphElem.X().toString(), 'y': graphElem.Y().toString() };
+
+                
 
                 /* Bind events to the graph element, events used when creating the answer */
                 if (scope.$parent.answer[elem] !== undefined) {
                     graphElem.mbName = elem;
+                    
                     if (graphElem.on !== undefined) {
+                       
                         graphElem.on('drag', function () {
                             //set answer to model
                             scope.$parent.answer[this.mbName].Answer = { 'x': this.X().toString(), 'y': this.Y().toString() };
@@ -276,12 +284,12 @@ angular.module('mattemotorApp')
             }
         };
 
-        scope.createMouseCoordinates(exercise.graph.showMouseCoordinates);
+        scope.createMouseCoordinates(scope.graph.showMouseCoordinates);
 
         var priorityQueue = {};
 
-        for (var graphElement in exercise.graph) {
-            var elem = exercise.graph[graphElement];
+        for (var graphElement in scope.graph) {
+            var elem = scope.graph[graphElement];
 
             var JSXGraphOption = scope.JSXGraphOptions[graphElement];
             if (JSXGraphOption) {

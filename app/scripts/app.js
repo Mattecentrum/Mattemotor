@@ -16,22 +16,25 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'pascalprecht.translate'
+        'pascalprecht.translate',
+        'as.sortable'
     ])
     .config(['$routeProvider', '$locationProvider', '$translateProvider', 
     function($routeProvider, $locationProvider, $translateProvider) {
         $routeProvider
-            .when('/:language/list/:listId/exercise/:exerciseId', {
-              templateUrl: '/views/exercise.html',
-              controller: 'ExerciseCtrl',
-            })
             .when('/:language/list/:listId/result', {
                 templateUrl: '/views/result.html',
-                controller: 'ResultCtrl',
+                controller: 'ResultCtrl'
             })
+
+            .when('/:language/list/:listId/exercise/:exerciseId', {
+              templateUrl: '/views/exercise.html',
+              controller: 'ExerciseCtrl'
+            })
+           
             .when('/:language/list/:listId', {
               templateUrl: '/views/exercise.html',
-              controller: 'MainCtrl',
+              controller: 'MainCtrl'
             })
             .otherwise({
                 redirectTo: '/sv/list/1'

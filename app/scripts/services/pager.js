@@ -54,6 +54,20 @@ angular.module('mattemotorApp')
                     segments = $location.$$path.split('/');
                
                 return exercises.pop().id === segments.pop();
+            },
+
+            goToresultPage: function () {
+                var segments = $location.$$path.split('/');            
+                segments.pop();
+                segments.pop();
+                segments.push('result');
+                $location.path(segments.join('/'));
+            },
+
+            isResultPage: function () {
+                var segments = $location.$$path.split('/');
+
+                return segments[segments.length - 1] === 'result';
             }
         };
     }]);

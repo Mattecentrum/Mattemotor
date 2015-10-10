@@ -9,7 +9,7 @@
  */
 angular.module('mattemotorApp')
   .controller('ResultCtrl', ['$scope', '$translate', '$routeParams', '$location', 'exerciseList', 'progress', function ($scope, $translate, $routeParams, $location, exerciseList, progress) {
-    
+        
         $translate.use($routeParams.language);
 
         $scope.exercises = exerciseList.GetCurrent();
@@ -19,9 +19,7 @@ angular.module('mattemotorApp')
             i;
 
         for (i = $scope.exercises.exercises.length - 1; i >= 0; i--) {
-            if($scope.exercises.exercises[i].correct) {
-                numberOfExercises += 1;
-            }
+            numberOfExercises += $scope.exercises.exercises[i].correct ? 1 : 0;
         }
 
         $translate('RESULT_MESSAGE', { 
@@ -64,7 +62,6 @@ angular.module('mattemotorApp')
             segments.pop();
 
             segments.push($scope.exercises.next.id);
-
             $location.path(segments.join("/"));
         };
   }]);

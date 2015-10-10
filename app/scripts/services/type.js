@@ -29,7 +29,15 @@ angular.module('mattemotorApp')
 
             isArray: function (value) {
                 return struct.typeOf(value) === 'array';
-            } 
+            },
+
+            isObject: function (value) {
+                return struct.typeOf(value) === 'object';
+            },
+
+            isString: function (value) {
+                return struct.typeOf(value) === 'string';
+            },
         }; 
 
         return struct;

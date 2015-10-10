@@ -1,6 +1,28 @@
 <div class="center" math-jax>
     <div>
-    	<div class="cols func clearfix" multi-field>
+    	<div class="cols func clearfix">
+        	<div ng-repeat="token in tokens">
+        		
+        		<div data-ng-switch on="items[token]">
+
+        			<span data-ng-switch-when="undefined" >
+        			{{token}}
+        			</span>
+        	 		
+        	 		
+						<input data-ng-switch-default type="text" ng-model="answer[token].Answer" 
+        	 			ng-class="GetAnswerClass(token)" 
+        	 			ng-focus="ResetField(token)" 
+        	 			ng-keydown="$parent.keypressCallback($event,$parent.answer[token])" 
+        	 			/>
+        	 	</div>
+
+        	 	<!--<span data-ng-switch on="items[token] == undefined">
+        	 		{{ token }}
+        	 	</span> -->
+
+        	</span>
+
         </div>
     </div>
 </div>

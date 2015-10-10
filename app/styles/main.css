@@ -156,9 +156,11 @@
 	.mathexerciseengine .interaction input { text-align:right; border:1px solid #cfcfcf; color:#333; font-size:30px; display:block; width:290px; padding:6px 10px; -webkit-border-radius:3px; border-radius:3px; }
 	.mathexerciseengine .interaction select { -webkit-appearance: menulist-button; height:48px; font-size:20px; border:1px solid #cfcfcf; padding:11px 5px;  width:311px; -webkit-border-radius:3px; border-radius:3px; }
 	
-
+	.mathexerciseengine .interaction div.correct {background:#43E053;}
 	.mathexerciseengine .interaction input.correct,
 	.mathexerciseengine .interaction select.correct { background-color:#43E053; }
+	
+	.mathexerciseengine .interaction div.incorrect {background: #fb8e8e;}
 	.mathexerciseengine .interaction input.incorrect,
 	.mathexerciseengine .interaction select.incorrect { background-color:#fb8e8e; }
 

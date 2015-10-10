@@ -7,8 +7,27 @@
  * # etField
  */
 angular.module('mattemotorApp')
-  .directive('etField', function () {
-    return {
-      templateUrl: '/views/templates/et-field.html'
-   };
+    .directive('etField', function () {
+        return {
+            templateUrl: '/views/templates/et-field.html',
+            scope: {
+                items: '=',
+                answer: '=',
+                mathVars: '='    
+            },
+            controller: ['$scope', 'equalService', function($scope, equalService) {
+                $scope.evaluateExpression = function(expr) {
+                    return equalService.getCorrectAnswer($scope.mathVars, expr)
+                };
+
+                $scope.ResetField = function(key) {
+                    $scope.answer[key].Error = $scope.answer[key].Correct = false;
+                };
+
+                $scope.GetAnswerClass = function(key) {
+                    return $scope.answer[key].Error.Error ? ['incorrect'] : $scope.answer[key].Error.Correct ? ['correct']  : [];
+                };
+
+            }]
+        };
 });
