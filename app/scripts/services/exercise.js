@@ -17,7 +17,7 @@ angular.module('mattemotorApp')
         function getExercise(id, lang) {
         	var request = $http({
                     method: "GET",
-                    url: "json/"+lang+"/exercise/"+id+".json"
+                    url: "json/" + lang + "/exercise/" + id + ".json"
             	});
            
             return( request.then( handleSuccess, handleError ) );

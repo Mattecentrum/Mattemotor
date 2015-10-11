@@ -9,23 +9,21 @@
 angular.module('mattemotorApp')
   .directive('etSequence', function () {
     return {
-    	scope : {},
+    	scope : {
+            items: '=',
+            answer: '='
+        },
     	templateUrl: '/views/templates/et-sequence.html',
-    	controller: ['$rootScope', '$scope' , function($rootScope, $scope){
-    		
-    		//Set startvalue
-    		$scope.buttons = $scope.$parent.exercise.multichoice;
-    		$scope.answer = $scope.$parent.$parent.answer;
-
+    	controller: ['$rootScope', '$scope' , function($rootScope, $scope) {
     		//When show answer is clicked callback to set
     		$rootScope.$on('showAnswer', function (event, msg) {
 	            for (var propertyName in msg) {
-	               $scope.buttons[key].options = msg[propertyName].Answer;
+	               $scope.items[key].options = msg[propertyName].Answer;
 	            }
         	});
 
     		for(var key in $scope.answer) {
-    			$scope.answer[key].Answer = $scope.buttons[key].options;
+    			$scope.answer[key].Answer = $scope.items[key].options;
     		}
 
     		$scope.GetClassesForButton = function(name, option) {

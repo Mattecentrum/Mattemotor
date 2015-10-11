@@ -21,19 +21,16 @@ angular.module('mattemotorApp')
         }
 
         function applyRemoteData(data) {
-            
-
-
             //Exercise properties
             $scope.answer = {};
             $scope.mathVars = {};
             
-               for (var key in data.variables) {
+            for (var key in data.variables) {
                 $scope.mathVars[key] = angular.isArray(data.variables[key]) ? randomize(data.variables[key][0], data.variables[key][1]) : data.variables[key];
             } 
 
             findAndParseExpression(data);
-            
+
             $scope.expectedanswer = data.expectedanswer;
             $scope.multichoice = {};
             $scope.inputType = data.inputtype;
@@ -43,9 +40,6 @@ angular.module('mattemotorApp')
             $scope.id = data.id;
             $scope.inputformat = data.inputformat;
             $scope.image = data.image;
-
-
-            
 
             $scope.exerciseText = $sce.trustAsHtml(data.exercise);
 

@@ -154,7 +154,6 @@ angular.module('mattemotorApp')
 
     var service = {
         arraysEqual : function(a1, a2) {
-
             if(a1.length !== a2.length) {
                 return false;
             }
@@ -164,14 +163,12 @@ angular.module('mattemotorApp')
                     return false;
                 }       
             }     
-
             return true;
         },
 
         arraysContainsSameElements : function(a1, a2) {
             var copy1 = a1.slice(0).sort(),
                 copy2 = a2.slice(0).sort();
-
             return service.arraysEqual(copy1, copy2);
         },
 
@@ -184,9 +181,7 @@ angular.module('mattemotorApp')
         isEqual : function(variables, actual, expected) {
             throwIfNull("expected", expected);     
             expected = createFunctionForExpectedAnswer(variables, actual,  expected);
-  
             var type = typeResolver.typeOf(expected);
-            
             return typeTable[type](actual, expected);
         },
 

@@ -1,6 +1,6 @@
 {
     "id": "sequence",
-    "name":"Rang ordna talen",
+    "name":"Rangordna talen",
     "exercise": "Talen har kommit i fel ordning din uppgift är att rangordna talen från höst till lägst.",
     "inputtype":"sequence",
     "variables":{
@@ -11,7 +11,7 @@
     },
     "multichoice":{
         "question": {
-            "options":["{{B}}", "{{C}}","{{D}}", "{{E}}"]
+            "options":["{{B}}", "{{C}}", "{{D}}", "{{E}}"]
         }
     },
     "expectedanswer": {

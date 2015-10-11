@@ -13,11 +13,11 @@ angular.module('mattemotorApp')
             scope: {
                 items: '=',
                 answer: '=',
-                mathVars: '='    
+                variables: '='    
             },
             controller: ['$scope', 'equalService', function($scope, equalService) {
                 $scope.evaluateExpression = function(expr) {
-                    return equalService.getCorrectAnswer($scope.mathVars, expr)
+                    return equalService.getCorrectAnswer($scope.variables, expr)
                 };
 
                 $scope.ResetField = function(key) {
@@ -27,7 +27,6 @@ angular.module('mattemotorApp')
                 $scope.GetAnswerClass = function(key) {
                     return $scope.answer[key].Error.Error ? ['incorrect'] : $scope.answer[key].Error.Correct ? ['correct']  : [];
                 };
-
             }]
         };
 });

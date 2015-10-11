@@ -12,17 +12,17 @@
     </div>
 
     <div data-ng-switch on="inputType" data-ng-class="{'additional':graph != null}">
-        <!-- START OF TEMPLATES prefixed with et- (exercise template)  -->
-        <div et-field items='expectedanswer' answer='answer' mathVars="mathVars" data-ng-switch-when="field" class="clearfix"></div>
+        <!-- START EXERCISE TEMPLATES -->
+        <div et-field items='expectedanswer' answer='answer' variables='mathVars' data-ng-switch-when="field" class="clearfix"></div>
 
         <div et-dropdown items="multichoice" answer="answer" data-ng-switch-when="dropdown" math-jax class="clearfix"></div>
 
         <div et-button items="multichoice" answer="answer" data-ng-switch-when="button" class="clearfix"></div>
 
-        <div et-sequence data-ng-switch-when="sequence" class="clearfix"></div> 
+        <div et-sequence items="multichoice" answer="answer" data-ng-switch-when="sequence" class="clearfix"></div> 
 
         <div et-multifield items='expectedanswer' answer='answer' inputformat='inputformat' data-ng-switch-when="multifield" class="clearfix"></div>
-        <!-- END OF TEMPLATES -->
+        <!-- END EXERCISE TEMPLATES -->
     </div>
 
     <div>
