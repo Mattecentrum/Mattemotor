@@ -25,7 +25,7 @@ angular.module('mattemotorApp')
                 };
 
                 $scope.GetAnswerClass = function(key) {
-                    return $scope.answer[key].Error.Error ? ['incorrect'] : $scope.answer[key].Error.Correct ? ['correct']  : [];
+                    return $scope.answer[key].Error ? ['incorrect'] : $scope.answer[key].Correct ? ['correct']  : [];
                 };
             }]
         };
