@@ -37,6 +37,7 @@ angular.module('mattemotorApp')
             $scope.graph = data.graph;
             $scope.name = data.name;
             $scope.error = data.error;
+            $scope.correct = data.correct;
             $scope.id = data.id;
             $scope.inputformat = data.inputformat;
             $scope.image = data.image;

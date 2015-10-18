@@ -29,7 +29,6 @@ angular.module('mattemotorApp')
             $scope.resultMessage = resultMessage;
         });
 
-
         $scope.resetExerciseList = function() {
             for (var i = $scope.exercises.exercises.length - 1; i >= 0; i--) {
                 Progress.RemoveProgress($scope.exercises.exercises[i]);
@@ -43,10 +42,7 @@ angular.module('mattemotorApp')
 
         $scope.redo = function() {
             $scope.resetExerciseList();
-
             var path = $location.$$path, segments = path.split('/');
-
-            //remove last item
             segments.pop();
             segments.push($scope.exercises.exercises[0].id);
             $location.path(segments.join("/"));
@@ -55,12 +51,8 @@ angular.module('mattemotorApp')
         $scope.next = function() {
             var path = $location.$$path,
                 segments = path.split('/');
-
-            //remove last item
             segments.pop();
-            //remove last item
             segments.pop();
-
             segments.push($scope.exercises.next.id);
             $location.path(segments.join("/"));
         };

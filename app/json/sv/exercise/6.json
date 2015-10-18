@@ -2,7 +2,7 @@
 	"id": "6",
 	"name":"Avläs funktionen",
 	"inputtype":"multifield",
-	"inputformat":"\\(k = \\)[[field1]] \\(m = \\)[[field2]]",
+	"inputformat":"$$k = $$[[field1]] $$m = $$[[field2]]",
 	"exercise":"Nedan visas grafen för en rät linje. Fyll i rätt k-värde och m-värde i rutorna nedanför.<br>Tips! Du kan dra i punkten för att avläsa koordinater.",
 	"variables":{"k":[-3,3],"m":[-2,2]},
 	"graph":{

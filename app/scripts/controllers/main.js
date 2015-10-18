@@ -34,13 +34,12 @@ angular.module('mattemotorApp')
         });
         
         $scope.getClass = function(exercise) {
-            var result = [];
+            var result = [],
+                status = progress.GetProgressByExerciseId(exercise.id);
 
             if (exercise.id == $routeParams.exerciseId) {
                 result.push('current');
             }
-
-            var status = progress.GetProgressByExerciseId(exercise.id);
 
             if(!status) return result; 
 

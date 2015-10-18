@@ -1,3 +1,7 @@
+	/*Reset*/
+	ul { padding: 0 0 0 0;}
+	/**/
+    
     .exercisecontainermodel #article { max-width: 580px; max-width: 58rem;}
     .exercisecontainermodel .menubreadcrumbs {display: none;}
 
@@ -114,9 +118,6 @@
 	#article .mathexerciseengine.list ul ul { height:0; overflow:hidden; display:none; }
 	#article .mathexerciseengine ul li { margin-left: 0; list-style-type: none;}
     
-
-
-
 	#article .mathexerciseengine.list > ul > li:first-child { border-top-style:solid; }
 	#article .mathexerciseengine ul li.box:first-child { border-top-style:solid; }
 	#article .mathexerciseengine .row > div:first-child { float:left; font-size:16px; line-height:31px; }
@@ -176,6 +177,10 @@
 	.mathexerciseengine .interaction .button.submit { font-size:25px; margin:25px 0 0; }
 
 	.mathexerciseengine .interaction .additional { margin:20px 0 0; }
+
+	.mathexerciseengine .interaction input { margin-right: 10px; }
+	.mathexerciseengine .interaction input.multifield { width: 90px; }
+
 
 	.mathexerciseengine .info { margin:30px 20px 0; padding: 25px 30px 20px 30px; -webkit-border-radius:3px; border-radius:3px; }
 	.mathexerciseengine .info h2 { text-align:center; font-size:28px; line-height:30px; text-transform:none; margin: 0; padding:0; border: none; }

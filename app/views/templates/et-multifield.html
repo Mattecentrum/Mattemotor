@@ -1,17 +1,17 @@
 <div class="center" math-jax>
     <div class="cols func clearfix">
         <div ng-repeat="token in tokens">
-        	<div data-ng-switch on="items[token]">
-    			<span data-ng-switch-when="undefined" >
-    			{{token}}
-    			</span>
-    	 		
-				<input data-ng-switch-default type="text" ng-model="answer[token].Answer" 
-	 			ng-class="GetAnswerClass(token)" 
-	 			ng-focus="ResetField(token)" 
-	 			ng-keydown="$parent.keypressCallback($event,$parent.answer[token])" 
-	 			/>
-        	 </div>
+            <div data-ng-switch on="items[token]">
+                <span class="multifield" data-ng-switch-when="undefined" >
+                    {{token}}
+                </span>
+                
+                <input class="multifield" data-ng-switch-default type="text" ng-model="answer[token].Answer" 
+                    ng-class="GetAnswerClass(token)" 
+                    ng-focus="ResetField(token)" 
+                    ng-keydown="$parent.keypressCallback($event,$parent.answer[token])" 
+                />
+             </div>
         </div>
      </div>
 </div>
