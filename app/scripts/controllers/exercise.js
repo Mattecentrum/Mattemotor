@@ -11,8 +11,6 @@ angular.module('mattemotorApp')
   .controller('ExerciseCtrl', ['$scope', '$routeParams', '$rootScope', '$sce', '$window', '$translate', 'exercise', 'progress', 'pager', 'equalService',
     function ($scope, $routeParams, $rootScope, $sce, $window, $translate, exerciseService, progress, pager, equalService) {
 
-        loadExerciseData($routeParams.exerciseId, $routeParams.language);
-
         function loadExerciseData(id, lang) {
             exerciseService.getExercise(id, lang)
                 .then(function( data ) {
@@ -20,14 +18,19 @@ angular.module('mattemotorApp')
                 });
         }
 
+        loadExerciseData($routeParams.exerciseId, $routeParams.language);
+
         function applyRemoteData(data) {
+            var key,
+                a,
+                name;
             //Exercise properties
             $scope.answer = {};
             $scope.mathVars = {};
-            
-            for (var key in data.variables) {
+
+            for (key in data.variables) {
                 $scope.mathVars[key] = angular.isArray(data.variables[key]) ? randomize(data.variables[key][0], data.variables[key][1]) : data.variables[key];
-            } 
+            }
 
             findAndParseExpression(data);
 
@@ -44,16 +47,16 @@ angular.module('mattemotorApp')
 
             $scope.exerciseText = $sce.trustAsHtml(data.exercise);
 
-            for (var a in data.expectedanswer) {
-                $scope.answer[a] = { 
-                    Answer: null, 
-                    Correct: false, 
-                    Error: false 
+            for (a in data.expectedanswer) {
+                $scope.answer[a] = {
+                    Answer: null,
+                    Correct: false,
+                    Error: false
                 };
             }
 
-            for (var name in data.multichoice) {
-                $scope.multichoice[name] = { 
+            for (name in data.multichoice) {
+                $scope.multichoice[name] = {
                     options: shuffle(data.multichoice[name].options),
                     question: data.multichoice[name].question
                 };
@@ -61,10 +64,17 @@ angular.module('mattemotorApp')
         }
 
         function findAndParseExpression(obj) {
-            for (var key in obj) {
-                if (key === 'expectedanswer' || !obj.hasOwnProperty(key)) continue;
-                else if (angular.isObject(obj[key]) || angular.isArray(obj[key])) findAndParseExpression(obj[key]);
-                else if (angular.isString(obj[key])) obj[key] = equalService.getCorrectAnswer($scope.mathVars, obj[key]);
+            var key;
+            for (key in obj) {
+                if (key === 'expectedanswer' || !obj.hasOwnProperty(key)) {
+                    continue;
+                }
+                else if (angular.isObject(obj[key]) || angular.isArray(obj[key])) {
+                    findAndParseExpression(obj[key]);
+                }
+                else if (angular.isString(obj[key])) { 
+                    obj[key] = equalService.getCorrectAnswer($scope.mathVars, obj[key]); 
+                }
             }
         }
 
@@ -113,7 +123,7 @@ angular.module('mattemotorApp')
                 toSplit = to.toString().split('.'),
                 decimals = fromSplit[1] ? fromSplit[1] : 0,
                 seed = to - from,
-                tmp = toSplit[1] ? toSplit.length : 0,    
+                tmp = toSplit[1] ? toSplit.length : 0,
                 decimals = tmp > decimals ? tmp : decimals,
                 pow = Math.pow(10, decimals),
                 randomNumber = ((Math.random() * seed) + from);
@@ -128,14 +138,14 @@ angular.module('mattemotorApp')
                 var predefinedAnswer = $scope.expectedanswer[propertyName],
                     givenAnswer = answer[propertyName],
                     equal = equalService.isEqual($scope.mathVars, givenAnswer.Answer, predefinedAnswer);
-       
+
                 if (!equal) {
                     var definederrors = $scope.error.definederrors || undefined;
                     for(var e in definederrors) {
-                        $scope.error.message = givenAnswer.Answer == definederrors[e].match ? definederrors[e].message : ""; 
+                        $scope.error.message = givenAnswer.Answer == definederrors[e].match ? definederrors[e].message : "";
                     }
                 }
-                
+
                 givenAnswer.Correct = equal;
                 givenAnswer.Error = !equal;
                 givenAnswer.current = true;
@@ -144,7 +154,7 @@ angular.module('mattemotorApp')
                 if(!equal) {
                     $scope.Correct = false;
                     $scope.Error = true;
-                } 
+                }
             }
 
             $rootScope.$broadcast('answered', answer);
@@ -156,7 +166,7 @@ angular.module('mattemotorApp')
             });
         };
 
-        $scope.next = function() {    
+        $scope.next = function() {
             if (pager.last())  pager.goToresultPage();
             else pager.next();
         };
