@@ -1,0 +1,7 @@
+{
+	"urlparameter": "exercise",
+	"endpoints": {
+		"list" : "json/:language/list/:listId.json",
+		"exercise": "json/:lang/exercise/:id.json"
+	}
+}

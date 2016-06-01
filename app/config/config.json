@@ -1,0 +1,4 @@
+{
+	"exerciseListUrl": "json/:language/list/:listId.json",
+	"exerciseUrl": "json/:language/exercise/:exerciseId.json"
+}

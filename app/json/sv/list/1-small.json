@@ -1,0 +1,15 @@
+{
+    "educationFolderUrl": "http://www.matteboken.se/lektioner/skolar-3",
+    "educationFolderName": "Skolår 3",
+    "sectionName":"Tal",
+    "sectionUrl": "http://www.matteboken.se/lektioner/skolar-3/tal",
+    "classUrl": "http://www.matteboken.se/lektioner/skolar-3/tal/talen-0-1000",
+    "className": "Talen 0–1000",
+    "language": "sv",
+    "exercises":[
+        {"id":"first","name":"Vilket är störst"},
+        {"id":"3","name":"Vilket är nästa tal"},
+        {"id":"4","name":"Rätt ordning"}
+    ],
+    "next":{"name":"Addition","id":"1"}
+}
