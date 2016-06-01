@@ -3,7 +3,7 @@
         <ul  data-as-sortable="dragControlListeners" data-ng-model="item.options">
             <li data-ng-repeat="option in item.options" style="text-align: center;" data-as-sortable-item>
                 <div data-as-sortable-item-handle class="gray button" data-ng-class="GetClassesForButton(name, option)">
-                    <span compile="option" style="text-align: center;" data-ng-bind="option"></span> 
+                    <span compile="option" style="text-align: center;">{{option.substring(1)}}</span> 
                 </div>
             </li>
         </ul>

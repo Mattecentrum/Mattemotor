@@ -11,7 +11,7 @@ angular.module('mattemotorApp')
     .controller('MainCtrl', ['$rootScope', '$scope', '$route', '$routeParams', '$location', '$translate', 'pager', 'exerciseList', 'progress', function($rootScope, $scope, $route, $routeParams, $location, $translate, pager, exerciseList, progress) {
        
         $scope.exercises = {};
- 
+        $scope.pathName = document.location.pathname;
         $scope.$on('$routeChangeSuccess', function() {
             
             $translate.use($routeParams.language);  
@@ -87,7 +87,7 @@ angular.module('mattemotorApp')
                 exercises[i].current = (exercises[i].id === $routeParams.exerciseId);
                 exercises[i].listId = $scope.listId;
             }
-
+           
             exerciseList.SetCurrent($scope.exercises);
         };
  }]);

@@ -16,14 +16,14 @@
         <!-- endbuild -->
         <base href="/">
     </head>
-    <body class="mathexerciseengine exercise" ng-app="mattemotorApp">
+    <body>
         <!--[if lt IE 7]>
           <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="mathexerciseengine exercise" data-ng-app="mattemotorApp">
-            <div class="box" style="border-top-color:#e3a50c" data-ng-controller="MainCtrl as main">
+        <div id="mattemotorApp" class="mathexerciseengine exercise">
+            <div class="box" style="border-top-color:#7558A1" data-ng-controller="MainCtrl as main">
                 <div class="breadcrumb">
                     <span ng-bind-html="'EXERCISES' | translate"></span>
                     <a href="{{exercises.educationFolderUrl}}">{{exercises.educationFolderName}}</a> / <a href="{{exercises.sectionUrl}}">{{exercises.sectionName}}</a> / <a href="{{exercises.classUrl}}">{{exercises.className}}</a> 
@@ -31,7 +31,7 @@
                 <div class="monitor clearfix">
                     <div class="center">
                         <div>
-                            <a data-ng-repeat="exercise in exercises.exercises track by exercise.id" href="#{{$parent.exercises.language}}/list/{{exercise.listId}}/exercise/{{exercise.id}}" data-ng-class="getClass(exercise)"></a>
+                            <a data-ng-repeat="exercise in exercises.exercises track by exercise.id" href="{{$parent.pathName}}#/{{$parent.exercises.language}}/list/{{exercise.listId}}/exercise/{{exercise.id}}" data-ng-class="getClass(exercise)"></a>
                         </div>
                     </div>
                 </div>
@@ -65,6 +65,7 @@
 
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -90,7 +91,7 @@
         <script src="scripts/lib/tofunc/replacer.js"></script>
         <script src="scripts/lib/tofunc/expressionFinder.js"></script>
         <script src="scripts/directives/graph.js"></script>
-        <script src="scripts/lib/JSX/jsxgraphcore-0.96.js"></script>
+        
         <script src="scripts/lib/math/convert-to-math.js"></script>
         <script src="scripts/directives/multifield.js"></script>
         <script src="scripts/directives/mathjax.js"></script>
@@ -102,7 +103,10 @@
         <script src="scripts/directives/etdropdown.js"></script>
         <script src="scripts/directives/etmultifield.js"></script>
         <script src="scripts/services/sharedexercisedata.js"></script>
+        <script src="scripts/services/configservice.js"></script>
         <!-- endbuild -->
+
+        <script src="scripts/lib/JSX/jsxgraphcore-0.96.js"></script>
 
         <script type="text/javascript">
             //touch device only
@@ -110,6 +114,26 @@
                 setTimeout(
                     function () { elem.type = 'text' }, 100);
             }
+
+            fetchData().then(bootstrapApplication);
+
+            function fetchData() {
+                var initInjector = angular.injector(["ng"]);
+                var $http = initInjector.get("$http");
+
+                return $http.get("/json/config.json").then(function(response) {
+                    application.constant("config", response.data);
+                }, function(errorResponse) {
+                    // Handle error case
+                });
+            }
+
+            function bootstrapApplication() {
+                angular.element(document).ready(function () {
+                    angular.bootstrap('#mattemotorApp', ['mattemotorApp']);
+                });
+            }
+           
         </script>
     </body>
 </html>

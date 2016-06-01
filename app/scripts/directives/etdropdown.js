@@ -16,7 +16,7 @@ angular.module('mattemotorApp')
 
         controller: ['$scope', function($scope){
             $scope.ResetField = function(key) {
-                $scope.answer[key].Error = $scopeanswer[key].Correct = false;
+                $scope.answer[key].Error = $scope.answer[key].Correct = false;
             };
 
             $scope.GetAnswerClass = function(key) {
@@ -24,6 +24,6 @@ angular.module('mattemotorApp')
             };
       }],
       
-      templateUrl: '/views/templates/et-dropdown.html'
+      templateUrl: 'views/templates/et-dropdown.html'
    };
 });

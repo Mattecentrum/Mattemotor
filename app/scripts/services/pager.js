@@ -17,15 +17,14 @@ angular.module('mattemotorApp')
                     i;
 
                 //Note use $route or $routParams to get the current exerciseId
-
                 for (i = exercises.length - 1; i >= 0; i--) {
-                    if (exercises[i].id === current) {
+                    if (exercises[i].id == current) {
                         if (i <= exercises.length - 2) {
                             segments[segments.length - 1] = exercises[i + 1].id;
                         }
                     }
                 }
-                
+       
                 $location.path(segments.join('/'));
             },
 
@@ -49,11 +48,11 @@ angular.module('mattemotorApp')
 
             //Needs comments because very unclear what happens here. 
             //Refactor name to IsLast() or equal
-            last: function () {
+            isLast: function () {
                 var exercises = exerciseList.GetCurrent().exercises,
                     segments = $location.$$path.split('/');
                
-                return exercises.pop().id === segments.pop();
+                return exercises[exercises.length - 1].id == segments[segments.length - 1];
             },
 
             goToresultPage: function () {

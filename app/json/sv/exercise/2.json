@@ -1,29 +1,18 @@
 {
-  "id": "2",
-  "name": "Placera punkter",
-  "inputtype": "graph",
-  "exercise": "Placera punkten A i origo och punkten B i {{ q==1 ? 'första' : q==2 ? 'andra' : q==3 ? 'tredje' : 'fjärde' }} kvadranten.",
-  "variables": { "q" : [1,4] },
-  "graph": {
-    "points": {
-      "A" : {
-        "value": ["-9","9"],
-        "options" : {"infoboxDigits": "none","snapToGrid":true,"size":7,"snapSizeX":1,"snapSizeY":1,"fillColor":"#149cd1","strokeColor":"#149cd1","showInfobox":false}
-              },
-      "B" : {
-        "value": [-8,9],
-        "options" : {"infoboxDigits": "none","snapToGrid":true,"size":7,"snapSizeX":1,"snapSizeY":1,"fillColor":"#149cd1","strokeColor":"#149cd1","showInfobox":false}
-      }
-    }
-  },
-  "expectedanswer": {
-      "A": {"x": "0", "y": "0"},
-      "B": {
-              "x": "{{ (q == 1 || q == 4) &&  answer > 0 ? answer : (q == 2 || q == 3) && answer < 0 ? answer : (q == 1 || q == 4) ? 5 : -5  }}",
-              "y": "{{ (q == 1 || q == 2) &&  answer > 0 ? answer : (q == 3 || q == 4) && answer < 0 ? answer : (q == 1 || q == 2) ? 5 : -5  }}"
-      }
- },
-  "error": {
-      "message": "I origo gäller $x=0$ och $y=0$. Första kvadranten är längst upp till höger"
-  }
+    "id": "2",
+    "name":"Utrym labyrinten",
+ "image":"/images/exercises/utrymmlabyrint.png",
+    "exercise": "Hoppsan! Du är trasslat in dig i en isplätt där marken är ren is. Du kan antingen vrida dig åt vänster eller höger, eller gå framåt. När du går framåt går du hela vägen tills du träffar en vägg (eller kommer ut), eftersom du inte kan stanna på den hala isen. Dra dina förflyttningar i rätt ordning för att hitta ut ur labyrinten.",
+    "inputtype":"sequence",
+    "multichoice":{
+        "question": {
+            "options":["Vrid höger", "Gå fram", "Vrid vänster", "Gå fram", "Vrid höger", "Gå fram", "Vrid höger", "Gå fram", "Vrid vänster", "Gå fram"]
+        }
+    },
+    "expectedanswer": {
+        "question": ["Vrid höger", "Gå fram", "Vrid vänster", "Gå fram", "Vrid höger", "Gå fram", "Vrid höger", "Gå fram", "Vrid vänster", "Gå fram"]
+    },
+    "error": { "message": "Inte riktigt rätt. Tänk på att när du går framåt så går du hela vägen tills du träffar en vägg - och tänk på hur du står vriden från start."},
+    "correct": { "message": "Bra jobbat!"}
 }
+

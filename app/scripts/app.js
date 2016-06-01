@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var application = angular
     .module('mattemotorApp', [
         'ngAnimate',
         'ngCookies',
@@ -23,17 +23,17 @@ angular
     function($routeProvider, $locationProvider, $translateProvider) {
         $routeProvider
             .when('/:language/list/:listId/result', {
-                templateUrl: '/views/result.html',
+                templateUrl: 'views/result.html',
                 controller: 'ResultCtrl'
             })
 
             .when('/:language/list/:listId/exercise/:exerciseId', {
-              templateUrl: '/views/exercise.html',
+              templateUrl: 'views/exercise.html',
               controller: 'ExerciseCtrl'
             })
            
             .when('/:language/list/:listId', {
-              templateUrl: '/views/exercise.html',
+              templateUrl: 'views/exercise.html',
               controller: 'MainCtrl'
             })
             .otherwise({

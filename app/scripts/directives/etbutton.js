@@ -28,6 +28,6 @@ angular.module('mattemotorApp')
         		answer.Answer = new String(option).toString();
     		};
     	}],
-    	templateUrl: '/views/templates/et-button.html'
+    	templateUrl: 'views/templates/et-button.html'
     };
 });

@@ -8,7 +8,7 @@
  * Factory in the mattemotorApp.
  */
 angular.module('mattemotorApp')
-    .factory('exerciseList', function ($resource, $http) {
+    .factory('exerciseList', function (config, $resource, $http) {
         var self = this;
         return {
             SetCurrent: function (list) {
@@ -20,7 +20,13 @@ angular.module('mattemotorApp')
             },
 
             Load: function (options, callback) {
-                var call = $resource('json/:language/list/:listId.json', {}, {
+                var url = 'json/:language/list/:listId.json'
+                
+                if(config != null && config.endpoints != null) {
+                    url = config.endpoints.list;
+                }
+
+                var call = $resource(url, {}, {
                     query: { method: 'GET', params: { listId: 'all', language: 'all' }, isArray: true }
                 });
 

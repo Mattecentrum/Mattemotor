@@ -167,7 +167,7 @@ angular.module('mattemotorApp')
         };
 
         $scope.next = function() {
-            if (pager.last())  pager.goToresultPage();
+            if (pager.isLast())  pager.goToresultPage();
             else pager.next();
         };
     }

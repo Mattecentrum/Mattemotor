@@ -9,7 +9,7 @@
 angular.module('mattemotorApp')
     .directive('etField', function () {
         return {
-            templateUrl: '/views/templates/et-field.html',
+            templateUrl: 'views/templates/et-field.html',
             scope: {
                 items: '=',
                 answer: '=',

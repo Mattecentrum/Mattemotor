@@ -8,16 +8,25 @@
  * Factory in the mattemotorApp.
  */
 angular.module('mattemotorApp')
-    .factory('exercise', function ($http, $q) {
+    .factory('exercise', function (config, $http, $q) {
         
     	return({
     		getExercise: getExercise
     	});
 
         function getExercise(id, lang) {
-        	var request = $http({
+        	//falback
+            var url = "json/:lang/exercise/:id.json";
+
+            if(config != null && config.endpoints != null) {
+                url = config.endpoints.exercise;
+            }
+
+            url = url.replace(":id",id).replace(":lang", lang);
+
+            var request = $http({
                     method: "GET",
-                    url: "json/" + lang + "/exercise/" + id + ".json"
+                    url: url
             	});
            
             return( request.then( handleSuccess, handleError ) );
