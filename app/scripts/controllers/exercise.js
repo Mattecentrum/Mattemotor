@@ -157,7 +157,10 @@ angular.module('mattemotorApp')
                 }
             }
 
-            $rootScope.$broadcast('answered', answer);
+            $rootScope.$broadcast('answered', {
+                "data":answer, 
+                "inputType":$scope.inputType
+            });
 
             progress.AddProgress({
                 id: $scope.id,

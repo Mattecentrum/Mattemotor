@@ -17,7 +17,10 @@ angular.module('mattemotorApp')
     	controller: ['$rootScope', '$scope' , function($rootScope, $scope) {
     		//When show answer is clicked callback to set
     		$rootScope.$on('showAnswer', function (event, msg) {
-	            for (var propertyName in msg) {
+	           //check if message is for me
+                if(msg.inputType != 'sequence') return;
+
+                for (var propertyName in msg) {
 
                     var newArr = msg[propertyName].Answer.slice();
 

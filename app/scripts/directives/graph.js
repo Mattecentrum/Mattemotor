@@ -20,11 +20,14 @@ angular.module('mattemotorApp')
     return function (scope, element, attrs) {
         //listen to answered event
         $rootScope.$on('answered', function (event, msg) {
-            for (var propertyName in msg) {
+             //check if message is for me
+                if(msg.inputType != 'graph') return;
+
+            for (var propertyName in msg.data) {
                 var JSXGraphElement = scope.JSXGraphElements[propertyName];
 
                 if (JSXGraphElement) {
-                    if (msg[propertyName].Correct) {
+                    if (msg.data[propertyName].Correct) {
                         JSXGraphElement.setAttribute({ fillColor: '#6fe77d', strokeColor: '#6fe77d' });
                     }
                     else {
